@@ -1,0 +1,1337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2da2584f-502b-48b0-9f54-ac6621af371d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/draw3dOBB.py" afterPath="$PROJECT_DIR$/draw3dOBB.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modelVQContext.py" afterPath="$PROJECT_DIR$/modelVQContext.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testVQContext.py" afterPath="$PROJECT_DIR$/testVQContext.py" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.39935485">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/test.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="538">
+                  <caret line="253" column="31" lean-forward="false" selection-start-line="253" selection-start-column="31" selection-end-line="253" selection-end-column="31" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
+                    <element signature="e#1855#2909#0" expanded="false" />
+                    <element signature="e#5347#6082#0" expanded="false" />
+                    <element signature="e#6140#8106#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="testVQContextGen.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testVQContextGen.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1122">
+                  <caret line="61" column="40" lean-forward="false" selection-start-line="61" selection-start-column="40" selection-end-line="61" selection-end-column="40" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+                    <element signature="e#10641#14448#0" expanded="false" />
+                    <element signature="e#12098#13094#0" expanded="false" />
+                    <element signature="e#13138#14395#0" expanded="false" />
+                    <element signature="e#14490#14896#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="modelVQContextGen.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/modelVQContextGen.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="3520">
+                  <caret line="331" column="8" lean-forward="false" selection-start-line="331" selection-start-column="8" selection-end-line="331" selection-end-column="8" />
+                  <folding>
+                    <element signature="e#478#1046#0" expanded="false" />
+                    <element signature="e#1083#1714#0" expanded="false" />
+                    <element signature="e#1751#2385#0" expanded="false" />
+                    <element signature="e#2424#3152#0" expanded="false" />
+                    <element signature="e#3382#3828#0" expanded="false" />
+                    <element signature="e#3864#4234#0" expanded="false" />
+                    <element signature="e#4271#4898#0" expanded="false" />
+                    <element signature="e#4935#5577#0" expanded="false" />
+                    <element signature="e#5614#6028#0" expanded="false" />
+                    <element signature="e#6067#6700#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="testVQContext.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testVQContext.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2244">
+                  <caret line="176" column="25" lean-forward="false" selection-start-line="176" selection-start-column="25" selection-end-line="176" selection-end-column="25" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+                    <element signature="e#833#1175#0" expanded="false" />
+                    <element signature="e#1208#1604#0" expanded="false" />
+                    <element signature="e#1632#2256#0" expanded="false" />
+                    <element signature="e#2283#2674#0" expanded="false" />
+                    <element signature="e#2708#3324#0" expanded="false" />
+                    <element signature="e#6015#6763#0" expanded="false" />
+                    <element signature="e#10565#11859#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="draw3dOBB.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/draw3dOBB.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2508">
+                  <caret line="118" column="8" lean-forward="false" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="8" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="train.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/train.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2838">
+                  <caret line="146" column="46" lean-forward="false" selection-start-line="146" selection-start-column="46" selection-end-line="146" selection-end-column="46" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+                    <element signature="e#1408#1673#0" expanded="false" />
+                    <element signature="e#1699#2016#0" expanded="false" />
+                    <element signature="e#2257#2527#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="modelVQContext.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/modelVQContext.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="5060">
+                  <caret line="344" column="46" lean-forward="false" selection-start-line="344" selection-start-column="46" selection-end-line="344" selection-end-column="46" />
+                  <folding>
+                    <element signature="e#1083#1714#0" expanded="false" />
+                    <element signature="e#1751#2385#0" expanded="false" />
+                    <element signature="e#3382#3820#0" expanded="false" />
+                    <element signature="e#4263#4890#0" expanded="false" />
+                    <element signature="e#5606#6020#0" expanded="false" />
+                    <element signature="e#9350#9687#0" expanded="false" />
+                    <element signature="e#9723#10065#0" expanded="false" />
+                    <element signature="e#11035#11070#0" expanded="false" />
+                    <element signature="e#11548#11591#0" expanded="false" />
+                    <element signature="e#11646#11851#0" expanded="false" />
+                    <element signature="e#13223#13241#0" expanded="false" />
+                    <element signature="e#13295#13391#0" expanded="false" />
+                    <element signature="e#13439#13476#0" expanded="false" />
+                    <element signature="e#13534#13694#0" expanded="false" />
+                    <element signature="e#13765#13960#0" expanded="false" />
+                    <element signature="e#14005#14022#0" expanded="false" />
+                    <element signature="e#14067#14085#0" expanded="false" />
+                    <element signature="e#14190#14308#0" expanded="false" />
+                    <element signature="e#14495#15029#0" expanded="false" />
+                    <element signature="e#15081#15385#0" expanded="false" />
+                    <element signature="e#15438#16034#0" expanded="false" />
+                    <element signature="e#16090#16403#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chairDataset.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/chairDataset.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1232">
+                  <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="dataset.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dataset.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="418">
+                  <caret line="483" column="0" lean-forward="false" selection-start-line="483" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#2088#3997#0" expanded="false" />
+                    <element signature="e#4031#4656#0" expanded="false" />
+                    <element signature="e#4699#5459#0" expanded="false" />
+                    <element signature="e#5524#6726#0" expanded="false" />
+                    <element signature="e#6769#7269#0" expanded="false" />
+                    <element signature="e#7321#8340#0" expanded="false" />
+                    <element signature="e#8409#8843#0" expanded="false" />
+                    <element signature="e#8896#9411#0" expanded="false" />
+                    <element signature="e#9458#9604#0" expanded="false" />
+                    <element signature="e#9660#9694#0" expanded="false" />
+                    <element signature="e#9759#10325#0" expanded="false" />
+                    <element signature="e#10380#11722#0" expanded="false" />
+                    <element signature="e#12169#12595#0" expanded="false" />
+                    <element signature="e#12635#12744#0" expanded="false" />
+                    <element signature="e#12785#12900#0" expanded="false" />
+                    <element signature="e#12937#13334#0" expanded="false" />
+                    <element signature="e#13415#13747#0" expanded="false" />
+                    <element signature="e#13798#14530#0" expanded="false" />
+                    <element signature="e#15473#15554#0" expanded="false" />
+                    <element signature="e#16425#17104#0" expanded="false" />
+                    <element signature="e#17242#17587#0" expanded="false" />
+                    <element signature="e#19281#21141#0" expanded="false" />
+                    <element signature="e#21191#21318#0" expanded="false" />
+                    <element signature="e#21362#23252#0" expanded="false" />
+                    <element signature="e#24744#25454#0" expanded="false" />
+                    <element signature="e#25507#26373#0" expanded="false" />
+                    <element signature="e#26409#27345#0" expanded="false" />
+                    <element signature="e#27399#28842#0" expanded="false" />
+                    <element signature="e#28891#31419#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="util.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/util.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="533">
+                  <caret line="31" column="14" lean-forward="true" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="testMerge.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testMerge.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="770">
+                  <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+                  <folding>
+                    <element signature="e#0#30#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/../miniconda3/envs/torch0.4/lib/python3.6/site-packages/torch/utils/data/dataloader.py" />
+        <option value="$PROJECT_DIR$/fold.py" />
+        <option value="$PROJECT_DIR$/torchfoldext.py" />
+        <option value="$PROJECT_DIR$/modelVQContext.py" />
+        <option value="$PROJECT_DIR$/train.py" />
+        <option value="$PROJECT_DIR$/testVQContext.py" />
+        <option value="$PROJECT_DIR$/chairDataset.py" />
+        <option value="$PROJECT_DIR$/draw3dOBB.py" />
+        <option value="$PROJECT_DIR$/util.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="24" />
+    <option name="width" value="1680" />
+    <option name="height" value="1002" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SCORES" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SCORES" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.test">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="testMerge" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../../../miniconda3/envs/grass/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testMerge.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="train" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../../../miniconda3/envs/grass/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train.py" />
+      <option name="PARAMETERS" value="--finetune" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../../../miniconda3/envs/grass/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SCORES" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="--finetune" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Python.testMerge" />
+      <item index="1" class="java.lang.String" itemvalue="Python.train" />
+      <item index="2" class="java.lang.String" itemvalue="Python.test" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2da2584f-502b-48b0-9f54-ac6621af371d" name="Default" comment="" />
+      <created>1585300896092</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585300896092</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="24" width="1680" height="1002" extended-state="1" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06457453" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40293455" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34311512" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/testMerge.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/testMerge.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/testVQContext.py</url>
+          <line>339</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/testVQContext.py</url>
+          <line>136</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/modelVQContext.py</url>
+          <line>469</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/train.py</url>
+          <line>185</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/train.py</url>
+          <line>187</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/testVQContext.py</url>
+          <line>252</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dataset.py</url>
+          <line>447</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>120</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>97</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dataset.py</url>
+          <line>467</line>
+          <option name="timeStamp" value="97" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="98" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="torch.cat(refineboxes, 0)" language="Python" />
+        <watch expression="LA.norm(dir_1)" language="Python" />
+        <watch expression="tree.ops" language="Python" />
+        <watch expression="encoder2.dict.weight" language="Python" />
+        <watch expression="encoder.dict.weight" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/draw3dOBB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2464">
+          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testVQContextGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6336">
+          <caret line="298" column="28" lean-forward="false" selection-start-line="298" selection-start-column="28" selection-end-line="298" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#10641#14448#0" expanded="false" />
+            <element signature="e#12098#13094#0" expanded="false" />
+            <element signature="e#13138#14395#0" expanded="false" />
+            <element signature="e#14490#14896#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testMerge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testVQContext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7942">
+          <caret line="369" column="14" lean-forward="false" selection-start-line="369" selection-start-column="14" selection-end-line="369" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#833#1175#0" expanded="false" />
+            <element signature="e#1208#1604#0" expanded="false" />
+            <element signature="e#1632#2256#0" expanded="false" />
+            <element signature="e#2283#2674#0" expanded="false" />
+            <element signature="e#2708#3324#0" expanded="false" />
+            <element signature="e#6015#6763#0" expanded="false" />
+            <element signature="e#10565#11859#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelVQContext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6358">
+          <caret line="298" column="27" lean-forward="false" selection-start-line="298" selection-start-column="27" selection-end-line="298" selection-end-column="27" />
+          <folding>
+            <element signature="e#1083#1714#0" expanded="false" />
+            <element signature="e#1751#2385#0" expanded="false" />
+            <element signature="e#3382#3820#0" expanded="false" />
+            <element signature="e#4263#4890#0" expanded="false" />
+            <element signature="e#5606#6020#0" expanded="false" />
+            <element signature="e#9350#9687#0" expanded="false" />
+            <element signature="e#9723#10065#0" expanded="false" />
+            <element signature="e#11035#11070#0" expanded="false" />
+            <element signature="e#11548#11591#0" expanded="false" />
+            <element signature="e#11646#11851#0" expanded="false" />
+            <element signature="e#13223#13241#0" expanded="false" />
+            <element signature="e#13295#13391#0" expanded="false" />
+            <element signature="e#13439#13476#0" expanded="false" />
+            <element signature="e#13534#13694#0" expanded="false" />
+            <element signature="e#13765#13960#0" expanded="false" />
+            <element signature="e#14005#14022#0" expanded="false" />
+            <element signature="e#14067#14085#0" expanded="false" />
+            <element signature="e#14190#14308#0" expanded="false" />
+            <element signature="e#14495#15029#0" expanded="false" />
+            <element signature="e#15081#15385#0" expanded="false" />
+            <element signature="e#15438#16034#0" expanded="false" />
+            <element signature="e#16090#16403#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelVQContextGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#478#1046#0" expanded="false" />
+            <element signature="e#1083#1714#0" expanded="false" />
+            <element signature="e#1751#2385#0" expanded="false" />
+            <element signature="e#2424#3152#0" expanded="false" />
+            <element signature="e#3382#3828#0" expanded="false" />
+            <element signature="e#3864#4234#0" expanded="false" />
+            <element signature="e#4271#4898#0" expanded="false" />
+            <element signature="e#4935#5577#0" expanded="false" />
+            <element signature="e#5614#6028#0" expanded="false" />
+            <element signature="e#6067#6700#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#2088#3997#0" expanded="false" />
+            <element signature="e#4031#4656#0" expanded="false" />
+            <element signature="e#4699#5459#0" expanded="false" />
+            <element signature="e#5524#6726#0" expanded="false" />
+            <element signature="e#6769#7269#0" expanded="false" />
+            <element signature="e#7321#8340#0" expanded="false" />
+            <element signature="e#8409#8843#0" expanded="false" />
+            <element signature="e#8896#9411#0" expanded="false" />
+            <element signature="e#9458#9604#0" expanded="false" />
+            <element signature="e#9660#9694#0" expanded="false" />
+            <element signature="e#9759#10325#0" expanded="false" />
+            <element signature="e#10380#11722#0" expanded="false" />
+            <element signature="e#12169#12595#0" expanded="false" />
+            <element signature="e#12635#12744#0" expanded="false" />
+            <element signature="e#12785#12900#0" expanded="false" />
+            <element signature="e#12937#13334#0" expanded="false" />
+            <element signature="e#13415#13747#0" expanded="false" />
+            <element signature="e#13798#14530#0" expanded="false" />
+            <element signature="e#15473#15554#0" expanded="false" />
+            <element signature="e#16425#17104#0" expanded="false" />
+            <element signature="e#17242#17587#0" expanded="false" />
+            <element signature="e#19281#21141#0" expanded="false" />
+            <element signature="e#21191#21318#0" expanded="false" />
+            <element signature="e#21362#23252#0" expanded="false" />
+            <element signature="e#24744#25454#0" expanded="false" />
+            <element signature="e#25507#26373#0" expanded="false" />
+            <element signature="e#26409#27345#0" expanded="false" />
+            <element signature="e#27399#28842#0" expanded="false" />
+            <element signature="e#28891#31419#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/draw3dOBB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2464">
+          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testVQContextGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6336">
+          <caret line="298" column="28" lean-forward="false" selection-start-line="298" selection-start-column="28" selection-end-line="298" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#10641#14448#0" expanded="false" />
+            <element signature="e#12098#13094#0" expanded="false" />
+            <element signature="e#13138#14395#0" expanded="false" />
+            <element signature="e#14490#14896#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testMerge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testVQContext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7942">
+          <caret line="369" column="14" lean-forward="false" selection-start-line="369" selection-start-column="14" selection-end-line="369" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#833#1175#0" expanded="false" />
+            <element signature="e#1208#1604#0" expanded="false" />
+            <element signature="e#1632#2256#0" expanded="false" />
+            <element signature="e#2283#2674#0" expanded="false" />
+            <element signature="e#2708#3324#0" expanded="false" />
+            <element signature="e#6015#6763#0" expanded="false" />
+            <element signature="e#10565#11859#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelVQContext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6358">
+          <caret line="298" column="27" lean-forward="false" selection-start-line="298" selection-start-column="27" selection-end-line="298" selection-end-column="27" />
+          <folding>
+            <element signature="e#1083#1714#0" expanded="false" />
+            <element signature="e#1751#2385#0" expanded="false" />
+            <element signature="e#3382#3820#0" expanded="false" />
+            <element signature="e#4263#4890#0" expanded="false" />
+            <element signature="e#5606#6020#0" expanded="false" />
+            <element signature="e#9350#9687#0" expanded="false" />
+            <element signature="e#9723#10065#0" expanded="false" />
+            <element signature="e#11035#11070#0" expanded="false" />
+            <element signature="e#11548#11591#0" expanded="false" />
+            <element signature="e#11646#11851#0" expanded="false" />
+            <element signature="e#13223#13241#0" expanded="false" />
+            <element signature="e#13295#13391#0" expanded="false" />
+            <element signature="e#13439#13476#0" expanded="false" />
+            <element signature="e#13534#13694#0" expanded="false" />
+            <element signature="e#13765#13960#0" expanded="false" />
+            <element signature="e#14005#14022#0" expanded="false" />
+            <element signature="e#14067#14085#0" expanded="false" />
+            <element signature="e#14190#14308#0" expanded="false" />
+            <element signature="e#14495#15029#0" expanded="false" />
+            <element signature="e#15081#15385#0" expanded="false" />
+            <element signature="e#15438#16034#0" expanded="false" />
+            <element signature="e#16090#16403#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelVQContextGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#478#1046#0" expanded="false" />
+            <element signature="e#1083#1714#0" expanded="false" />
+            <element signature="e#1751#2385#0" expanded="false" />
+            <element signature="e#2424#3152#0" expanded="false" />
+            <element signature="e#3382#3828#0" expanded="false" />
+            <element signature="e#3864#4234#0" expanded="false" />
+            <element signature="e#4271#4898#0" expanded="false" />
+            <element signature="e#4935#5577#0" expanded="false" />
+            <element signature="e#5614#6028#0" expanded="false" />
+            <element signature="e#6067#6700#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#2088#3997#0" expanded="false" />
+            <element signature="e#4031#4656#0" expanded="false" />
+            <element signature="e#4699#5459#0" expanded="false" />
+            <element signature="e#5524#6726#0" expanded="false" />
+            <element signature="e#6769#7269#0" expanded="false" />
+            <element signature="e#7321#8340#0" expanded="false" />
+            <element signature="e#8409#8843#0" expanded="false" />
+            <element signature="e#8896#9411#0" expanded="false" />
+            <element signature="e#9458#9604#0" expanded="false" />
+            <element signature="e#9660#9694#0" expanded="false" />
+            <element signature="e#9759#10325#0" expanded="false" />
+            <element signature="e#10380#11722#0" expanded="false" />
+            <element signature="e#12169#12595#0" expanded="false" />
+            <element signature="e#12635#12744#0" expanded="false" />
+            <element signature="e#12785#12900#0" expanded="false" />
+            <element signature="e#12937#13334#0" expanded="false" />
+            <element signature="e#13415#13747#0" expanded="false" />
+            <element signature="e#13798#14530#0" expanded="false" />
+            <element signature="e#15473#15554#0" expanded="false" />
+            <element signature="e#16425#17104#0" expanded="false" />
+            <element signature="e#17242#17587#0" expanded="false" />
+            <element signature="e#19281#21141#0" expanded="false" />
+            <element signature="e#21191#21318#0" expanded="false" />
+            <element signature="e#21362#23252#0" expanded="false" />
+            <element signature="e#24744#25454#0" expanded="false" />
+            <element signature="e#25507#26373#0" expanded="false" />
+            <element signature="e#26409#27345#0" expanded="false" />
+            <element signature="e#27399#28842#0" expanded="false" />
+            <element signature="e#28891#31419#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/draw3dOBB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2464">
+          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testVQContextGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6336">
+          <caret line="298" column="28" lean-forward="false" selection-start-line="298" selection-start-column="28" selection-end-line="298" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#10641#14448#0" expanded="false" />
+            <element signature="e#12098#13094#0" expanded="false" />
+            <element signature="e#13138#14395#0" expanded="false" />
+            <element signature="e#14490#14896#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testMerge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testVQContext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7942">
+          <caret line="369" column="14" lean-forward="false" selection-start-line="369" selection-start-column="14" selection-end-line="369" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#833#1175#0" expanded="false" />
+            <element signature="e#1208#1604#0" expanded="false" />
+            <element signature="e#1632#2256#0" expanded="false" />
+            <element signature="e#2283#2674#0" expanded="false" />
+            <element signature="e#2708#3324#0" expanded="false" />
+            <element signature="e#6015#6763#0" expanded="false" />
+            <element signature="e#10565#11859#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelVQContext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6358">
+          <caret line="298" column="27" lean-forward="false" selection-start-line="298" selection-start-column="27" selection-end-line="298" selection-end-column="27" />
+          <folding>
+            <element signature="e#1083#1714#0" expanded="false" />
+            <element signature="e#1751#2385#0" expanded="false" />
+            <element signature="e#3382#3820#0" expanded="false" />
+            <element signature="e#4263#4890#0" expanded="false" />
+            <element signature="e#5606#6020#0" expanded="false" />
+            <element signature="e#9350#9687#0" expanded="false" />
+            <element signature="e#9723#10065#0" expanded="false" />
+            <element signature="e#11035#11070#0" expanded="false" />
+            <element signature="e#11548#11591#0" expanded="false" />
+            <element signature="e#11646#11851#0" expanded="false" />
+            <element signature="e#13223#13241#0" expanded="false" />
+            <element signature="e#13295#13391#0" expanded="false" />
+            <element signature="e#13439#13476#0" expanded="false" />
+            <element signature="e#13534#13694#0" expanded="false" />
+            <element signature="e#13765#13960#0" expanded="false" />
+            <element signature="e#14005#14022#0" expanded="false" />
+            <element signature="e#14067#14085#0" expanded="false" />
+            <element signature="e#14190#14308#0" expanded="false" />
+            <element signature="e#14495#15029#0" expanded="false" />
+            <element signature="e#15081#15385#0" expanded="false" />
+            <element signature="e#15438#16034#0" expanded="false" />
+            <element signature="e#16090#16403#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelVQContextGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#478#1046#0" expanded="false" />
+            <element signature="e#1083#1714#0" expanded="false" />
+            <element signature="e#1751#2385#0" expanded="false" />
+            <element signature="e#2424#3152#0" expanded="false" />
+            <element signature="e#3382#3828#0" expanded="false" />
+            <element signature="e#3864#4234#0" expanded="false" />
+            <element signature="e#4271#4898#0" expanded="false" />
+            <element signature="e#4935#5577#0" expanded="false" />
+            <element signature="e#5614#6028#0" expanded="false" />
+            <element signature="e#6067#6700#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#2088#3997#0" expanded="false" />
+            <element signature="e#4031#4656#0" expanded="false" />
+            <element signature="e#4699#5459#0" expanded="false" />
+            <element signature="e#5524#6726#0" expanded="false" />
+            <element signature="e#6769#7269#0" expanded="false" />
+            <element signature="e#7321#8340#0" expanded="false" />
+            <element signature="e#8409#8843#0" expanded="false" />
+            <element signature="e#8896#9411#0" expanded="false" />
+            <element signature="e#9458#9604#0" expanded="false" />
+            <element signature="e#9660#9694#0" expanded="false" />
+            <element signature="e#9759#10325#0" expanded="false" />
+            <element signature="e#10380#11722#0" expanded="false" />
+            <element signature="e#12169#12595#0" expanded="false" />
+            <element signature="e#12635#12744#0" expanded="false" />
+            <element signature="e#12785#12900#0" expanded="false" />
+            <element signature="e#12937#13334#0" expanded="false" />
+            <element signature="e#13415#13747#0" expanded="false" />
+            <element signature="e#13798#14530#0" expanded="false" />
+            <element signature="e#15473#15554#0" expanded="false" />
+            <element signature="e#16425#17104#0" expanded="false" />
+            <element signature="e#17242#17587#0" expanded="false" />
+            <element signature="e#19281#21141#0" expanded="false" />
+            <element signature="e#21191#21318#0" expanded="false" />
+            <element signature="e#21362#23252#0" expanded="false" />
+            <element signature="e#24744#25454#0" expanded="false" />
+            <element signature="e#25507#26373#0" expanded="false" />
+            <element signature="e#26409#27345#0" expanded="false" />
+            <element signature="e#27399#28842#0" expanded="false" />
+            <element signature="e#28891#31419#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/draw3dOBB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2464">
+          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testVQContextGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6336">
+          <caret line="298" column="28" lean-forward="false" selection-start-line="298" selection-start-column="28" selection-end-line="298" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#10641#14448#0" expanded="false" />
+            <element signature="e#12098#13094#0" expanded="false" />
+            <element signature="e#13138#14395#0" expanded="false" />
+            <element signature="e#14490#14896#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../miniconda3/envs/outdoor/lib/python3.6/site-packages/torch/__init__.pyi" />
+    <entry file="file://$PROJECT_DIR$/../miniconda3/envs/torch0.4/lib/python3.6/site-packages/torch/utils/data/dataloader.py" />
+    <entry file="file://$PROJECT_DIR$/../miniconda3/envs/torch0.4/lib/python3.6/site-packages/torch/nn/modules/module.py" />
+    <entry file="file://$PROJECT_DIR$/fold.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="985">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../miniconda3/envs/outdoor/lib/python3.6/site-packages/torch/autograd/variable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../miniconda3/envs/outdoor/lib/python3.6/site-packages/caffe2/python/rnn/lstm_comparison.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="12" column="9" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../miniconda3/envs/outdoor/lib/python3.6/site-packages/torch/__init__.pyi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="1529" column="6" lean-forward="false" selection-start-line="1529" selection-start-column="6" selection-end-line="1529" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../miniconda3/envs/grass/lib/python3.5/site-packages/torchfold/torchfold.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="93" column="49" lean-forward="false" selection-start-line="93" selection-start-column="49" selection-end-line="93" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../miniconda3/envs/outdoor/lib/python3.6/site-packages/torchfold-0.1.0-py3.6.egg!/torchfold/torchfold.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="146" column="30" lean-forward="false" selection-start-line="146" selection-start-column="30" selection-end-line="146" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dynamicplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/torchfoldext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../miniconda3/envs/grass/lib/python3.5/site-packages/torch/serialization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="355" column="0" lean-forward="false" selection-start-line="355" selection-start-column="0" selection-end-line="355" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../miniconda3/envs/grass/lib/python3.5/site-packages/torch/utils/data/dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="188" column="0" lean-forward="false" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../miniconda3/envs/grass/lib/python3.5/site-packages/torch/nn/functional.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="1023" column="0" lean-forward="false" selection-start-line="1023" selection-start-column="0" selection-end-line="1023" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../miniconda3/envs/grass/lib/python3.5/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testVQContextGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="61" column="40" lean-forward="false" selection-start-line="61" selection-start-column="40" selection-end-line="61" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#10641#14448#0" expanded="false" />
+            <element signature="e#12098#13094#0" expanded="false" />
+            <element signature="e#13138#14395#0" expanded="false" />
+            <element signature="e#14490#14896#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelVQContextGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3520">
+          <caret line="331" column="8" lean-forward="false" selection-start-line="331" selection-start-column="8" selection-end-line="331" selection-end-column="8" />
+          <folding>
+            <element signature="e#478#1046#0" expanded="false" />
+            <element signature="e#1083#1714#0" expanded="false" />
+            <element signature="e#1751#2385#0" expanded="false" />
+            <element signature="e#2424#3152#0" expanded="false" />
+            <element signature="e#3382#3828#0" expanded="false" />
+            <element signature="e#3864#4234#0" expanded="false" />
+            <element signature="e#4271#4898#0" expanded="false" />
+            <element signature="e#4935#5577#0" expanded="false" />
+            <element signature="e#5614#6028#0" expanded="false" />
+            <element signature="e#6067#6700#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2838">
+          <caret line="146" column="46" lean-forward="false" selection-start-line="146" selection-start-column="46" selection-end-line="146" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#1408#1673#0" expanded="false" />
+            <element signature="e#1699#2016#0" expanded="false" />
+            <element signature="e#2257#2527#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chairDataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1232">
+          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelVQContext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5060">
+          <caret line="344" column="46" lean-forward="false" selection-start-line="344" selection-start-column="46" selection-end-line="344" selection-end-column="46" />
+          <folding>
+            <element signature="e#1083#1714#0" expanded="false" />
+            <element signature="e#1751#2385#0" expanded="false" />
+            <element signature="e#3382#3820#0" expanded="false" />
+            <element signature="e#4263#4890#0" expanded="false" />
+            <element signature="e#5606#6020#0" expanded="false" />
+            <element signature="e#9350#9687#0" expanded="false" />
+            <element signature="e#9723#10065#0" expanded="false" />
+            <element signature="e#11035#11070#0" expanded="false" />
+            <element signature="e#11548#11591#0" expanded="false" />
+            <element signature="e#11646#11851#0" expanded="false" />
+            <element signature="e#13223#13241#0" expanded="false" />
+            <element signature="e#13295#13391#0" expanded="false" />
+            <element signature="e#13439#13476#0" expanded="false" />
+            <element signature="e#13534#13694#0" expanded="false" />
+            <element signature="e#13765#13960#0" expanded="false" />
+            <element signature="e#14005#14022#0" expanded="false" />
+            <element signature="e#14067#14085#0" expanded="false" />
+            <element signature="e#14190#14308#0" expanded="false" />
+            <element signature="e#14495#15029#0" expanded="false" />
+            <element signature="e#15081#15385#0" expanded="false" />
+            <element signature="e#15438#16034#0" expanded="false" />
+            <element signature="e#16090#16403#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testMerge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="770">
+          <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="483" column="0" lean-forward="false" selection-start-line="483" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
+          <folding>
+            <element signature="e#2088#3997#0" expanded="false" />
+            <element signature="e#4031#4656#0" expanded="false" />
+            <element signature="e#4699#5459#0" expanded="false" />
+            <element signature="e#5524#6726#0" expanded="false" />
+            <element signature="e#6769#7269#0" expanded="false" />
+            <element signature="e#7321#8340#0" expanded="false" />
+            <element signature="e#8409#8843#0" expanded="false" />
+            <element signature="e#8896#9411#0" expanded="false" />
+            <element signature="e#9458#9604#0" expanded="false" />
+            <element signature="e#9660#9694#0" expanded="false" />
+            <element signature="e#9759#10325#0" expanded="false" />
+            <element signature="e#10380#11722#0" expanded="false" />
+            <element signature="e#12169#12595#0" expanded="false" />
+            <element signature="e#12635#12744#0" expanded="false" />
+            <element signature="e#12785#12900#0" expanded="false" />
+            <element signature="e#12937#13334#0" expanded="false" />
+            <element signature="e#13415#13747#0" expanded="false" />
+            <element signature="e#13798#14530#0" expanded="false" />
+            <element signature="e#15473#15554#0" expanded="false" />
+            <element signature="e#16425#17104#0" expanded="false" />
+            <element signature="e#17242#17587#0" expanded="false" />
+            <element signature="e#19281#21141#0" expanded="false" />
+            <element signature="e#21191#21318#0" expanded="false" />
+            <element signature="e#21362#23252#0" expanded="false" />
+            <element signature="e#24744#25454#0" expanded="false" />
+            <element signature="e#25507#26373#0" expanded="false" />
+            <element signature="e#26409#27345#0" expanded="false" />
+            <element signature="e#27399#28842#0" expanded="false" />
+            <element signature="e#28891#31419#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../miniconda3/envs/outdoor/lib/python3.6/site-packages/mpl_toolkits/mplot3d/axes3d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="827">
+          <caret line="83" column="31" lean-forward="false" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/draw3dOBB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2508">
+          <caret line="118" column="8" lean-forward="false" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testVQContext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2244">
+          <caret line="176" column="25" lean-forward="false" selection-start-line="176" selection-start-column="25" selection-end-line="176" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#833#1175#0" expanded="false" />
+            <element signature="e#1208#1604#0" expanded="false" />
+            <element signature="e#1632#2256#0" expanded="false" />
+            <element signature="e#2283#2674#0" expanded="false" />
+            <element signature="e#2708#3324#0" expanded="false" />
+            <element signature="e#6015#6763#0" expanded="false" />
+            <element signature="e#10565#11859#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="253" column="31" lean-forward="false" selection-start-line="253" selection-start-column="31" selection-end-line="253" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#1855#2909#0" expanded="false" />
+            <element signature="e#5347#6082#0" expanded="false" />
+            <element signature="e#6140#8106#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="31" column="14" lean-forward="true" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
