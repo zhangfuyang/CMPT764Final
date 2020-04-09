@@ -252,7 +252,7 @@ def encode_fold(fold, tree):
     encoding = encode_node(tree.root)
     return encoding
 
-def decode_fold(model, feature, tree, Boxes, Syms, Labels):
+def decode_fold(model, feature, tree, Boxes, Syms, Labels, Ops):
     def encode_node(node):
         if node.is_leaf():
             if config.finetune:
@@ -281,13 +281,14 @@ def decode_fold(model, feature, tree, Boxes, Syms, Labels):
                 n = model.symNode(feature, s)
             return n
 
-    def decode_node(feature, node, newBoxs, newSyms, newLabels):
+    def decode_node(feature, node, newBoxs, newSyms, newLabels, newOps):
         if node.is_leaf():
             f = encode_node(node)
             reBox = model.boxNode(feature, f)
             #new_node = Tree.Node(box=reBox, node_type=Tree.NodeType.BOX)
             newBoxs.append(reBox.detach().cpu())
             newLabels.append(node.box_label)
+            newOps.append(0)
 
         elif node.is_adj():
             d = model.deSampleLayer(feature)
@@ -298,17 +299,19 @@ def decode_fold(model, feature, tree, Boxes, Syms, Labels):
             fr = encode_node(right_node)
             left_f = model.outterNode(feature, fr)
             right_f = model.outterNode(feature, fl)
-            decode_node(left_f, node.left, newBoxs, newSyms, newLabels)
-            decode_node(right_f, node.right, newBoxs, newSyms, newLabels)
+            decode_node(left_f, node.left, newBoxs, newSyms, newLabels, newOps)
+            decode_node(right_f, node.right, newBoxs, newSyms, newLabels, newOps)
+            newOps.append(1)
         elif node.is_sym():
             feature = model.vqlizationFeature(feature)
 
             f = encode_node(node)
             new_f, sym_f = model.symParaNode(feature, f)
             newSyms.append(sym_f.detach().cpu())
-            decode_node(new_f, node.left, newBoxs, newSyms, newLabels)
+            decode_node(new_f, node.left, newBoxs, newSyms, newLabels, newOps)
+            newOps.append(2)
 
-    decode_node(feature, tree.root, Boxes, Syms, Labels)
+    decode_node(feature, tree.root, Boxes, Syms, Labels, Ops)
 
 grass_data = ChairDataset(config.data_path)
 def my_collate(batch):
@@ -325,14 +328,16 @@ def inference(example):
     refineboxes = []
     syms = []
     Labels = []
-    decode_fold(model, enc_fold_nodes[0], example, refineboxes, syms, Labels)
+    Ops = []
+    decode_fold(model, enc_fold_nodes[0], example, refineboxes, syms, Labels, Ops)
     refineboxes = torch.cat(refineboxes, 0)
     refineLabels = torch.Tensor(Labels, 0)
+    refineOps = torch.Tensor(Ops).unsqueeze(0)
     if len(syms) == 0:
         syms = torch.zeros((1, 8))
     else:
         syms = torch.cat(syms, 0)
-    refine_tree = Tree(refineboxes, example.ops, syms, refineLabels)
+    refine_tree = Tree(refineboxes, refineOps, syms, refineLabels)
     return refine_tree
 
 
