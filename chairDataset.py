@@ -13,7 +13,7 @@ class Tree(object):
         SYM = 2  # symmetry (symmetric part grouping) node
 
     class Node(object):
-        def __init__(self, box=None, left=None, right=None, node_type=None, sym=None):
+        def __init__(self, box=None, left=None, right=None, node_type=None, sym=None, box_label=None):
             self.box = box          # box feature vector for a leaf node
             self.box_noise = box          # box feature vector for a leaf node with noise
             self.sym = sym          # symmetry parameter vector for a symmetry node
@@ -22,6 +22,7 @@ class Tree(object):
             self.right = right      # right child
             self.node_type = node_type
             self.label = torch.LongTensor([self.node_type.value])
+            self.box_label = box_label
 
         def is_leaf(self):
             return self.node_type == Tree.NodeType.BOX and self.box is not None
@@ -32,11 +33,13 @@ class Tree(object):
         def is_sym(self):
             return self.node_type == Tree.NodeType.SYM
 
-    def __init__(self, boxes, ops, syms):
+    def __init__(self, boxes, ops, syms, labels):
         box_list = [b for b in torch.split(boxes, 1, 0)]
         sym_param = [s for s in torch.split(syms, 1, 0)]
+        labels_list = list(torch.split(labels, 1))
         box_list.reverse()
         sym_param.reverse()
+        labels_list.reverse()
         queue = []
         self.leves = []
         self.symNodes = []
@@ -44,7 +47,7 @@ class Tree(object):
         self.ops = ops
         for id in range(ops.size()[1]):
             if ops[0, id] == Tree.NodeType.BOX.value:
-                n = Tree.Node(box=box_list.pop(), node_type=Tree.NodeType.BOX)
+                n = Tree.Node(box=box_list.pop(), node_type=Tree.NodeType.BOX, box_label=labels_list.pop().numpy()[0])
                 self.leves.append(n)
                 queue.append(n)
             elif ops[0, id] == Tree.NodeType.ADJ.value:
@@ -90,7 +93,7 @@ class ChairDataset(data.Dataset):
         box_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'chair_boxes.mat'))['boxes']).float()
         op_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'chair_ops.mat'))['ops']).float()
         sym_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'chair_syms.mat'))['syms']).float()
-
+        label_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'chair_labels.mat'))['labels']).float()
         num_examples = op_data.size()[1]
         box_data = torch.chunk(box_data, num_examples, 1)
         op_data = torch.chunk(op_data, num_examples, 1)
@@ -102,7 +105,8 @@ class ChairDataset(data.Dataset):
             boxes = torch.t(box_data[i])
             ops = torch.t(op_data[i])
             syms = torch.t(sym_data[i])
-            tree = Tree(boxes, ops, syms)
+            labels = label_data[:, i]
+            tree = Tree(boxes, ops, syms, labels)
             self.trees.append(tree)
             #showGenshape(boxes.data.cpu().numpy())
 

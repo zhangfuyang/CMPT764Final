@@ -24,7 +24,7 @@ def tryPlot():
                -0.986967000000000,-0.160173000000000,0.0155341000000000,0.0146809000000000,0.00650174000000000,0.999801000000000], cmap(float(7)/7))
     plt.show()
 
-def draw(ax, p, color):
+def draw(ax, p, color, label):
     tmpPoint = p
 
     center = tmpPoint[0: 3]
@@ -58,7 +58,7 @@ def draw(ax, p, color):
     cornerpoints[7][:] = center + d1 + d2 + d3
 
     ax.plot([cornerpoints[0][0], cornerpoints[1][0]], [cornerpoints[0][1], cornerpoints[1][1]],
-            [cornerpoints[0][2], cornerpoints[1][2]], c=color)
+            [cornerpoints[0][2], cornerpoints[1][2]], c=color, label=label)
     ax.plot([cornerpoints[0][0], cornerpoints[2][0]], [cornerpoints[0][1], cornerpoints[2][1]],
             [cornerpoints[0][2], cornerpoints[2][2]], c=color)
     ax.plot([cornerpoints[1][0], cornerpoints[3][0]], [cornerpoints[1][1], cornerpoints[3][1]],
@@ -100,7 +100,7 @@ def showGenshapes(genshapes):
         plt.show()
 
 
-def showGenshape(genshape, save=False, savedir=None):
+def showGenshape(genshape, save=False, savedir=None, labels=None):
     recover_boxes = genshape
 
     fig = plt.figure(0)
@@ -110,9 +110,12 @@ def showGenshape(genshape, save=False, savedir=None):
     ax.set_ylim(-0.7, 0.7)
     ax.set_zlim(-0.7, 0.7)
     ax.view_init(45, 45)
+    if labels is None:
+        labels = [None for i in range(len(recover_boxes))]
     for jj in range(len(recover_boxes)):
         p = recover_boxes[jj][:]
-        draw(ax, p, cmap(float(jj)/len(recover_boxes)))
+        draw(ax, p, cmap(float(jj)/len(recover_boxes)), labels[jj])
+    plt.legend()
     if save:
         plt.savefig(savedir)
     else:
