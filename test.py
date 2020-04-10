@@ -331,7 +331,7 @@ def inference(example):
     Ops = []
     decode_fold(model, enc_fold_nodes[0], example, refineboxes, syms, Labels, Ops)
     refineboxes = torch.cat(refineboxes, 0)
-    refineLabels = torch.Tensor(Labels, 0)
+    refineLabels = torch.Tensor(Labels)
     refineOps = torch.Tensor(Ops).unsqueeze(0)
     if len(syms) == 0:
         syms = torch.zeros((1, 8))
