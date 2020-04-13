@@ -9,6 +9,7 @@ from torchfoldext import FoldExt
 from modelVQContext import GRASSMerge
 from chairDataset import Tree
 import math
+from render2mesh import directRender, alignBoxAndRender
 
 
 config = util.get_args()
@@ -45,6 +46,7 @@ def decode_structure(root, noise=False):
     stack = [root]
     boxes = []
     labels = []
+    objnames = []
     while len(stack) > 0:
         node = stack.pop()
         # label_prob = model.nodeClassifier(f)
@@ -73,6 +75,7 @@ def decode_structure(root, noise=False):
                 reBox = node.box
             reBoxes = [reBox]
             reLabels = [node.box_label]
+            reObj = [node.objname]
             s = syms.pop()
             l1 = abs(s[0] + 1)
             l2 = abs(s[0])
@@ -97,6 +100,7 @@ def decode_structure(root, noise=False):
                     newbox = torch.cat([newcenter, dir0, newdir1, newdir2])
                     reBoxes.append(newbox.unsqueeze(0))
                     reLabels.append(node.box_label)
+                    reObj.append(node.objname)
             if l3 < 0.15:
                 sList = torch.split(s, 1, 0)
                 bList = torch.split(reBox.data.squeeze(0), 1, 0)
@@ -115,6 +119,7 @@ def decode_structure(root, noise=False):
                     newbox = torch.cat([newcenter, dir0, dir1, dir2])
                     reBoxes.append(newbox.unsqueeze(0))
                     reLabels.append(node.box_label)
+                    reObj.append(node.objname)
             if l2 < 0.15:
                 sList = torch.split(s, 1, 0)
                 bList = torch.split(reBox.data.squeeze(0), 1, 0)
@@ -137,10 +142,12 @@ def decode_structure(root, noise=False):
                 newbox = torch.cat([newcenter, dir0, dir1, dir2])
                 reBoxes.append(newbox.unsqueeze(0))
                 reLabels.append(node.box_label)
+                reObj.append(node.objname)
 
             boxes.extend(reBoxes)
             labels.extend(reLabels)
-    return boxes, labels
+            objnames.extend(reObj)
+    return boxes, labels, objnames
 
 def render_node_to_box(tree):
     Boxs = []
@@ -252,7 +259,7 @@ def encode_fold(fold, tree):
     encoding = encode_node(tree.root)
     return encoding
 
-def decode_fold(model, feature, tree, Boxes, Syms, Labels, Ops):
+def decode_fold(model, feature, tree, Boxes, Syms, Labels, Ops, objnames):
     def encode_node(node):
         if node.is_leaf():
             if config.finetune:
@@ -281,7 +288,7 @@ def decode_fold(model, feature, tree, Boxes, Syms, Labels, Ops):
                 n = model.symNode(feature, s)
             return n
 
-    def decode_node(feature, node, newBoxs, newSyms, newLabels, newOps):
+    def decode_node(feature, node, newBoxs, newSyms, newLabels, newOps, newObj):
         if node.is_leaf():
             f = encode_node(node)
             reBox = model.boxNode(feature, f)
@@ -289,6 +296,7 @@ def decode_fold(model, feature, tree, Boxes, Syms, Labels, Ops):
             newBoxs.append(reBox.detach().cpu())
             newLabels.append(node.box_label)
             newOps.append(0)
+            newObj.append(node.objname)
 
         elif node.is_adj():
             d = model.deSampleLayer(feature)
@@ -299,8 +307,8 @@ def decode_fold(model, feature, tree, Boxes, Syms, Labels, Ops):
             fr = encode_node(right_node)
             left_f = model.outterNode(feature, fr)
             right_f = model.outterNode(feature, fl)
-            decode_node(left_f, node.left, newBoxs, newSyms, newLabels, newOps)
-            decode_node(right_f, node.right, newBoxs, newSyms, newLabels, newOps)
+            decode_node(left_f, node.left, newBoxs, newSyms, newLabels, newOps, newObj)
+            decode_node(right_f, node.right, newBoxs, newSyms, newLabels, newOps, newObj)
             newOps.append(1)
         elif node.is_sym():
             feature = model.vqlizationFeature(feature)
@@ -308,10 +316,10 @@ def decode_fold(model, feature, tree, Boxes, Syms, Labels, Ops):
             f = encode_node(node)
             new_f, sym_f = model.symParaNode(feature, f)
             newSyms.append(sym_f.detach().cpu())
-            decode_node(new_f, node.left, newBoxs, newSyms, newLabels, newOps)
+            decode_node(new_f, node.left, newBoxs, newSyms, newLabels, newOps, newObj)
             newOps.append(2)
 
-    decode_node(feature, tree.root, Boxes, Syms, Labels, Ops)
+    decode_node(feature, tree.root, Boxes, Syms, Labels, Ops, objnames)
 
 grass_data = ChairDataset(config.data_path)
 def my_collate(batch):
@@ -329,22 +337,24 @@ def inference(example):
     syms = []
     Labels = []
     Ops = []
-    decode_fold(model, enc_fold_nodes[0], example, refineboxes, syms, Labels, Ops)
+    Objs = []
+    decode_fold(model, enc_fold_nodes[0], example, refineboxes, syms, Labels, Ops, Objs)
     refineboxes = torch.cat(refineboxes, 0)
     refineLabels = torch.Tensor(Labels)
+
     refineOps = torch.Tensor(Ops).unsqueeze(0)
     if len(syms) == 0:
         syms = torch.zeros((1, 8))
     else:
         syms = torch.cat(syms, 0)
-    refine_tree = Tree(refineboxes, refineOps, syms, refineLabels)
+    refine_tree = Tree(refineboxes, refineOps, syms, refineLabels, Objs)
     return refine_tree
 
-
+image = True
 for batch_idx, batch in enumerate(test_iter):
     print(batch_idx)
     example=batch[0]
-    boxes, labels = decode_structure(example.root)
+    boxes, labels, objnames = decode_structure(example.root)
     label_text = []
     for label in labels:
         if label == 0:
@@ -356,12 +366,15 @@ for batch_idx, batch in enumerate(test_iter):
         elif label == 3:
             label_text.append('armrest')
 
-    showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text)
+    showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text,
+                 save=image, savedir='demo/' + str(batch_idx)+'_original.png')
+    directRender(torch.cat(boxes,0).data.cpu().numpy(), objnames, 'demo/' + str(batch_idx)+'.obj')
+    gtboxes = boxes
 
     refine_tree = example
     for i in range(1):
         refine_tree = inference(refine_tree)
-        boxes, labels = decode_structure(refine_tree.root)
+        boxes, labels, objnames = decode_structure(refine_tree.root)
         label_text = []
         for label in labels:
             if label == 0:
@@ -372,11 +385,15 @@ for batch_idx, batch in enumerate(test_iter):
                 label_text.append('leg')
             elif label == 3:
                 label_text.append('armrest')
-
-        showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text)
+        showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text,
+                     save=image, savedir='demo/' + str(batch_idx)+'_original_recon.png')
+    boxes.reverse()
+    objnames.reverse()
+    alignBoxAndRender(torch.cat(gtboxes,0).data.cpu().numpy(),
+                      torch.cat(boxes,0).data.cpu().numpy(), objnames, 'demo/'+str(batch_idx)+'_recon.obj')
 
     example.addNoise()
-    boxes, labels = decode_structure(example.root, noise=True)
+    boxes, labels, objnames = decode_structure(example.root, noise=True)
     label_text = []
     for label in labels:
         if label == 0:
@@ -387,12 +404,15 @@ for batch_idx, batch in enumerate(test_iter):
             label_text.append('leg')
         elif label == 3:
             label_text.append('armrest')
-    showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text)
+    showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text,
+                 save=image, savedir='demo/' + str(batch_idx)+'_original_noise.png')
+    alignBoxAndRender(torch.cat(gtboxes,0).data.cpu().numpy(),
+                      torch.cat(boxes,0).data.cpu().numpy(), objnames, 'demo/'+str(batch_idx)+'_noise.obj')
 
     refine_tree = example
     for i in range(1):
         refine_tree = inference(refine_tree)
-        boxes, labels = decode_structure(refine_tree.root)
+        boxes, labels, objnames = decode_structure(refine_tree.root)
         label_text = []
         for label in labels:
             if label == 0:
@@ -403,5 +423,10 @@ for batch_idx, batch in enumerate(test_iter):
                 label_text.append('leg')
             elif label == 3:
                 label_text.append('armrest')
-        showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text)
+        showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text,
+                     save=image, savedir='demo/' + str(batch_idx)+'_original_noise_recon.png')
+    boxes.reverse()
+    objnames.reverse()
+    alignBoxAndRender(torch.cat(gtboxes,0).data.cpu().numpy(),
+                      torch.cat(boxes,0).data.cpu().numpy(), objnames, 'demo/'+str(batch_idx)+'_noise_recon.obj')
 
