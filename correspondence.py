@@ -615,7 +615,7 @@ if __name__ == '__main__':
 		print('selected_a_ids', selected_a_ids)
 		print('match_b_ids', match_b_ids)
 		print('selected_b_ids', selected_b_ids)
-		shape_pair_ids={'selected_a_ids': selected_a_ids, 'selected_b_ids':selected_b_ids}
+		shape_pair_ids={'shape_a_index':i, 'shape_b_index':i+1, 'selected_a_ids': selected_a_ids, 'selected_b_ids':selected_b_ids}
 		final_result.append(shape_pair_ids)
 		clean_tree(tree_a.root)
 		clean_tree(tree_b.root)
