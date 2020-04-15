@@ -3,7 +3,30 @@ import os
 from numpy import linalg as LA
 import matplotlib.pyplot as plt
 
-datapath = '../Chair/models'
+datapath = '../Chair_parts'
+def renderBoxes2mesh_new(boxes, obj_names):
+    results = []
+    for box_i in range(boxes.shape[0]):
+        box = boxes[box_i]
+        vertices = []
+        faces = []
+        obj_name = obj_names[box_i]
+        with open(os.path.join(datapath, obj_name), 'r') as f:
+            lines = f.readlines()
+        for line in lines:
+            if line[0] != 'v' and line[0] != 'f':
+                continue
+            line = line.strip('\n')
+            items = line.split(' ')
+            if items[0] == 'v':
+                vertices.append((float(items[1]), float(items[2]), float(items[3])))
+            if items[0] == 'f':
+                faces.append((int(items[1]), int(items[2]), int(items[3])))
+
+        results.append({'vertices': vertices, 'faces': faces})
+    return results
+
+
 def renderBoxes2mesh(boxes, obj_names):
     obj_name_set = set(obj_names)
     obj_dict = {}
@@ -87,12 +110,12 @@ def saveOBJ(obj_names, outfilename, results):
     f.close()
 
 def directRender(boxes, obj_names, outfilename):
-    results = renderBoxes2mesh(boxes, obj_names)
+    results = renderBoxes2mesh_new(boxes, obj_names)
     saveOBJ(obj_names, outfilename, results)
 
 
 def alignBoxAndRender(gtBoxes, predBoxes, obj_names, outfilename):
-    results = renderBoxes2mesh(gtBoxes, obj_names)
+    results = renderBoxes2mesh_new(gtBoxes, obj_names)
     for i in range(len(results)):
         gtbox = gtBoxes[i]
         gtCenter = gtbox[0:3][np.newaxis, ...].T
