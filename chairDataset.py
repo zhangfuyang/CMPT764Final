@@ -31,7 +31,7 @@ class Tree(object):
         SYM = 2     # symmetry (symmetric part grouping) node
 
     class Node(object):
-        def __init__(self, box=None, left=None, right=None, node_type=None, sym=None, box_label=None, objname=None):
+        def __init__(self, box=None, left=None, right=None, node_type=None, sym=None, box_label=None, objname=None, tree_id=None):
             self.box = box            # box feature vector for a leaf node
             self.box_noise = box          # box feature vector for a leaf node with noise
             self.sym = sym            # symmetry parameter vector for a symmetry node
@@ -46,6 +46,7 @@ class Tree(object):
             self.loss = 999
             self.match_id = None
             self.selected = False
+            self.tree_id = tree_id
 
         def is_leaf(self):
             return self.node_type == Tree.NodeType.BOX and self.box is not None
@@ -63,6 +64,7 @@ class Tree(object):
         box_list.reverse()
         sym_param.reverse()
         labels_list.reverse()
+        objname.reverse()
         queue = []
         self.leves = []
         self.symNodes = []
@@ -128,9 +130,10 @@ class ChairDataset(data.Dataset):
         for i in range(len(op_data)):
             boxes = torch.t(box_data[i])
             ops = torch.t(op_data[i])
+            box_num = int((ops==0).sum())
             syms = torch.t(sym_data[i])
             labels = label_data[:, i]
-            tree = Tree(boxes, ops, syms, labels, [objname[i][0]+'.obj' for _ in range(boxes.shape[0])])
+            tree = Tree(boxes, ops, syms, labels, [objname[i][0][box_i][0] for box_i in range(box_num)])
             give_node_id(tree.root)
             self.trees.append(tree)
             #showGenshape(boxes.data.cpu().numpy())
