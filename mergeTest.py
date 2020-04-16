@@ -50,6 +50,7 @@ def decode_structure(root, noise=False):
 	syms = [torch.ones(8).mul(10)]
 	stack = [root]
 	boxes = []
+	boxes_type = []
 	labels = []
 	objnames = []
 	while len(stack) > 0:
@@ -79,6 +80,7 @@ def decode_structure(root, noise=False):
 			else:
 				reBox = node.box
 			reBoxes = [reBox]
+			reBoxes_type = [-1]
 			reLabels = [node.box_label]
 			reObj = [node.objname]
 			s = syms.pop()
@@ -104,6 +106,7 @@ def decode_structure(root, noise=False):
 					newdir2 = rotm.matmul(dir2)
 					newbox = torch.cat([newcenter, dir0, newdir1, newdir2])
 					reBoxes.append(newbox.unsqueeze(0))
+					reBoxes_type.append(reBox.data.squeeze(0).cpu().numpy())
 					reLabels.append(node.box_label)
 					reObj.append(node.objname)
 			if l3 < 0.15:
@@ -123,6 +126,7 @@ def decode_structure(root, noise=False):
 					newcenter = center.add(trans.mul(i+1))
 					newbox = torch.cat([newcenter, dir0, dir1, dir2])
 					reBoxes.append(newbox.unsqueeze(0))
+					reBoxes_type.append(reBox.data.squeeze(0).cpu().numpy())
 					reLabels.append(node.box_label)
 					reObj.append(node.objname)
 			if l2 < 0.15:
@@ -146,13 +150,15 @@ def decode_structure(root, noise=False):
 				dir2 = dir2.add(ref_normal.mul(-2*ref_normal.matmul(dir2)))
 				newbox = torch.cat([newcenter, dir0, dir1, dir2])
 				reBoxes.append(newbox.unsqueeze(0))
+				reBoxes_type.append(reBox.data.squeeze(0).cpu().numpy())
 				reLabels.append(node.box_label)
 				reObj.append(node.objname)
 
 			boxes.extend(reBoxes)
+			boxes_type.extend(reBoxes_type)
 			labels.extend(reLabels)
 			objnames.extend(reObj)
-	return boxes, labels, objnames
+	return boxes, boxes_type, labels, objnames
 
 
 def encode_fold(fold, root):
@@ -407,6 +413,23 @@ def get_label_text(labels):
 			label_text.append('armrest')
 	return label_text
 
+def reorder(gtboxes, boxes, boxes_type, labels, objnames):
+	newboxes = []
+	newboxes_type = []
+	newlabels = []
+	newobjnames = []
+	for i in range(len(gtboxes)):
+		ll = 100
+		id = -1
+		for j in range(len(boxes)):
+			if float(((boxes[j] - gtboxes[i])**2).sum().cpu()) < ll:
+				ll = float(((boxes[j] - gtboxes[i])**2).sum().cpu())
+				id = j
+		newboxes.append(boxes[id])
+		newboxes_type.append(boxes_type[id])
+		newlabels.append(labels[id])
+		newobjnames.append(objnames[id])
+	return newboxes, newboxes_type, newlabels, newobjnames
 
 result_path = './result/'+config.testset
 if not os.path.exists(result_path):
@@ -429,18 +452,20 @@ for i in range(len(pairs)):
 		tree = grass_data[idx]
 		node_arrays.append(nodes)
 		tree_array.append(tree)
-		boxes, labels, objnames = decode_structure(tree.root)
+		boxes, _, labels, objnames = decode_structure(tree.root)
 		label_text = get_label_text(labels)
 		showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text,
 						save=image, savedir=result_path+'/Sample_' + str(i)+'_Original_Shape_' + str(j) + '.png')
 	   
 
 	merge_root = get_root_merge_trees(tree_array, node_arrays)
-	boxes, labels, objnames = decode_structure(merge_root)
+	boxes, boxes_type, labels, objnames = decode_structure(merge_root)
 	label_text = get_label_text(labels)
 	showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text,
 					save=image, savedir=result_path+'/Sample_' + str(i)+'_Original_Merge.png')
-	
+	directRender(torch.cat(boxes,0).data.cpu().numpy(), boxes_type, objnames, result_path+'/Sample_' + str(i) + '_Original_Merge.obj')
+	gtboxes = boxes
+	gtbox_type = boxes_type
 	refine_root = merge_root
 
 	j = 0
@@ -452,10 +477,13 @@ for i in range(len(pairs)):
 		prev_loss = loss
 		loss, refine_tree = inference(refine_root)
 		refine_root = refine_tree.root
-		boxesRefine, labelsRefine, objnamesRefine = decode_structure(refine_root)
+		boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine = decode_structure(refine_root)
+		boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine = reorder(gtboxes, boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine)
 		label_text = get_label_text(labelsRefine)
 		# showGenshape(torch.cat(boxesRefine,0).data.cpu().numpy(), labels=label_text,
 						# save=image, savedir=result_path+'/Sample_' + str(i) + '_Refine_Merge_try_' + str(j) + '.png')
 	print('final loss :', loss)
 	showGenshape(torch.cat(boxesRefine,0).data.cpu().numpy(), labels=label_text,
 						save=image, savedir=result_path+'/Sample_' + str(i) + '_Refine_Merge_try_' + str(j) + '.png')
+	alignBoxAndRender(torch.cat(gtboxes,0).data.cpu().numpy(),
+				  	torch.cat(boxesRefine,0).data.cpu().numpy(), gtbox_type, objnamesRefine, result_path+'/Sample_'+str(i)+'_Refine_Merge_try_'+str(j)+'.obj')

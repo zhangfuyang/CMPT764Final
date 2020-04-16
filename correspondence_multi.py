@@ -613,6 +613,7 @@ if __name__ == '__main__':
 
 	""" Specific configuration for Multi-Shape correspondences
 	"""
+	result_path = './result/'+config.testset
 	multi_shape_num = min(grass_data.data_size, 3)
 	
 	final_result = []
@@ -793,10 +794,10 @@ if __name__ == '__main__':
 		# shape_pair_ids={'shape_a_index':i, 'shape_b_index':i+1, 'selected_a_ids': selected_a_ids, 'selected_b_ids':selected_b_ids}
 		# final_result.append(shape_pair_ids)
 	
-	import pickle
-	with open("shape_node_ids_%d_shapes.bin" % multi_shape_num, 'wb') as f:
-		pickle.dump(final_result, f)
-	savemat("shape_node_ids_%d_shapes.mat" % multi_shape_num, {'final_result':final_result})
+	#import pickle
+	#with open("shape_node_ids_%d_shapes.bin" % multi_shape_num, 'wb') as f:
+#		pickle.dump(final_result, f)
+	savemat(result_path + "/shape_node_ids_%d_shapes.mat" % multi_shape_num, {'final_result':final_result})
 	# boxes, labels = decode_structure(tree_a.root)
 	# label_text = []
 	# for label in labels:
