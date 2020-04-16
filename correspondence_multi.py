@@ -12,8 +12,6 @@ import math
 import random
 import numpy as np
 from scipy.io import savemat
-from itertools import combinations
-import os
 
 def vrrotvec2mat(rotvector):
 	s = math.sin(rotvector[3])
@@ -466,9 +464,9 @@ def show_correspondence(tree_a, tree_b):
 			#print('box_b, ', box_b.size())
 			boxes = torch.cat((node.box, box_b), 0)
 			label_text = []
-			label_text.append('shape_a_part')
+			label_text.append('shape_a_part:%d' % node.id)
 			for i in range(box_b.size(0)):
-				label_text.append('shape_b_part')
+				label_text.append('shape_b_part:%d' % node.match_id)
 			showGenshape(boxes.data.cpu().numpy(), labels=label_text)
 			return
 		elif node.is_adj():
@@ -485,10 +483,10 @@ def show_correspondence(tree_a, tree_b):
 			boxes = torch.cat((box_a, box_b), 0)
 			label_text = []
 			for i in range(box_a.size(0)):
-				label_text.append('shape_a_part')
-			label_text.append('shape_a_part')
+				label_text.append('shape_a_part:%d' % node.id)
+			label_text.append('shape_a_part:%d' % node.id)
 			for i in range(box_b.size(0)):
-				label_text.append('shape_b_part')
+				label_text.append('shape_b_part:%d' % node.match_id)
 			showGenshape(boxes.data.cpu().numpy(), labels=label_text)
 			return
 	dfs_a_show(tree_a.root)
@@ -564,6 +562,21 @@ def sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids):
 					match_b_ids.append(node.match_id)
 	dfs_a_sample(tree_a.root)
 
+def get_correspondence_from_tree_a(tree_a, selected_a_ids, match_b_ids):
+	def dfs_a_sample(node):
+		if node.is_leaf():
+			if node.match_id != 0:
+				selected_a_ids.append(node.id)
+				match_b_ids.append(node.match_id)
+		elif node.is_adj():
+			dfs_a_sample(node.left)
+			dfs_a_sample(node.right)
+		else:
+			if node.match_id != 0:
+				selected_a_ids.append(node.id)
+				match_b_ids.append(node.match_id)
+	dfs_a_sample(tree_a.root)
+
 def clean_tree(node):
 	node.loss = 999
 	node.match_id = None
@@ -579,6 +592,7 @@ def clean_tree(node):
 if __name__ == '__main__':
 
 	config = util.get_args()
+
 	config.cuda = config.no_cuda
 	if config.gpu < 0 and config.cuda:
 		config.gpu = 0
@@ -594,30 +608,27 @@ if __name__ == '__main__':
 	model.eval()
 	if config.finetune:
 		print("fintune phase")
-	
-	grass_data = ChairDataset(config.data_path, config.testset)
+
+	grass_data = ChairDataset(dir=config.data_path, data_name='A')
 
 	""" Specific configuration for Multi-Shape correspondences
 	"""
-	result_path = './result/'+config.testset
-	if not os.path.exists(result_path):
-		os.makedirs(result_path) 
-	multi_shape_num = config.sample_shape_number
-	iters = combinations(list(range(grass_data.data_size)), multi_shape_num)
+	multi_shape_num = 5
+	
 	final_result = []
-	for it in iters:
-	#for i in range(grass_data.data_size):
+	for i in range(100):
 
 		# generating index -------------------------------------------------------------------------
-		#a_range = np.arange(grass_data.data_size)
-		#np.random.shuffle(a_range)
-		#indices_array = [i, i+1, i+2, i+3, i+4]
+		a_range = np.arange(100)
+		np.random.shuffle(a_range)
+		# indices_array = [i, i+1, i+2, i+3, i+4]
+		indices_array = [i, i+1, i+2]
 
-		# for j in range(a_range.shape[0]):
-		#	if a_range[j] not in indices_array:
-		#		indices_array.append(int(a_range[j]))
-		# indices_array = indices_array[:multi_shape_num]
-		indices_array = it
+		for j in range(a_range.shape[0]):
+			if a_range[j] not in indices_array:
+				indices_array.append(int(a_range[j]))
+		indices_array = indices_array[:multi_shape_num]
+
 		# assign the label for each tree -----------------------------------------------------------
 		for g_idx in indices_array:
 			tree = grass_data[g_idx]
@@ -628,27 +639,31 @@ if __name__ == '__main__':
 		for j_idx in indices_array:
 			sel_indices[j_idx] = []
 
+		matches = []
+		matches_node_indices = []
+
 		anchor_idx = indices_array[0]
 		for m_idx in indices_array[1:]:
 
-			dfs_a(grass_data[anchor_idx].root, grass_data[m_idx], model)
+			dfs_a(grass_data[m_idx].root, grass_data[ anchor_idx], model)
 
 			selected_a_ids = []
 			match_b_ids = []
 			while len(selected_a_ids) < 1:
-				sample_id_from_tree_a(grass_data[anchor_idx], selected_a_ids, match_b_ids)
+				sample_id_from_tree_a(grass_data[m_idx], selected_a_ids, match_b_ids)
 
 			give_valid_to_tree_b(grass_data[anchor_idx], match_b_ids)
 			selected_b_ids = []	  
 			sample_id_from_tree_b(grass_data[anchor_idx], selected_b_ids)
+			# show_correspondence(grass_data[anchor_idx], grass_data[m_idx])
 
-			for a_id in selected_a_ids:
-				if a_id not in sel_indices[anchor_idx]:
-					sel_indices[anchor_idx].append(a_id)
+			for b_id in selected_b_ids :
+				if b_id not in sel_indices[anchor_idx]:
+					sel_indices[anchor_idx].append(b_id)
 					
-			for b_id in selected_b_ids:
-				if b_id not in sel_indices[m_idx]:
-					sel_indices[m_idx].append(b_id)
+			for a_id in selected_a_ids:
+				if a_id not in sel_indices[m_idx]:
+					sel_indices[m_idx].append(a_id)
 
 			clean_tree(grass_data[anchor_idx].root)
 			clean_tree(grass_data[m_idx].root)
@@ -657,50 +672,92 @@ if __name__ == '__main__':
 			print('match_b_ids', match_b_ids)
 			print('selected_b_ids', selected_b_ids)
 
+		# # check if other shape has matches towards anchor idx
+		# for m_idx in indices_array[1:]:
+
+		# 	# dfs_a(grass_data[m_idx].root, grass_data[anchor_idx], model)
+		# 	# # show_correspondence(grass_data[anchor_idx], grass_data[m_idx])
+
+		# 	# selected_a_ids = []
+		# 	# match_b_ids = []
+		# 	# while len(selected_a_ids) < 1:
+		# 	# 	get_correspondence_from_tree_a(grass_data[m_idx], selected_a_ids, match_b_ids)
+
+		# 	# # add to match pairs
+		# 	# for i in range(len(selected_a_ids)):
+		# 	# 	matches.append([m_idx, anchor_idx])
+		# 	# 	matches_node_indices.append([selected_a_ids[i], match_b_ids[i]])
+
+		# 	dfs_a(grass_data[anchor_idx].root, grass_data[m_idx], model)
+
+		# 	selected_a_ids = []
+		# 	match_b_ids = []
+		# 	while len(selected_a_ids) < 1:
+		# 		get_correspondence_from_tree_a(grass_data[anchor_idx], selected_a_ids, match_b_ids)
+
+		# 	# add to match pairs
+		# 	for i in range(len(selected_a_ids)):
+		# 		matches.append([anchor_idx, m_idx])
+		# 		matches_node_indices.append([selected_a_ids[i], match_b_ids[i]])
+
 		# check if other two has the same parts
-		for j_idx in range(len(indices_array) - 1):
-			for m_idx in range(len(indices_array) - 1):
-				if j_idx >= m_idx:
+		for j_idx in range(len(indices_array)):
+			for m_idx in range(len(indices_array)):
+				if j_idx == m_idx:
 					continue
 				
-				j_idx_ = indices_array[j_idx + 1]
-				m_idx_ = indices_array[m_idx + 1]
+				j_idx_ = indices_array[j_idx]
+				m_idx_ = indices_array[m_idx]
 
 				dfs_a(grass_data[j_idx_].root, grass_data[m_idx_], model)
 				
 				selected_a_ids = []
 				match_b_ids = []
 				while len(selected_a_ids) < 1:
-					sample_id_from_tree_a(grass_data[j_idx_], selected_a_ids, match_b_ids)
-
+					get_correspondence_from_tree_a(grass_data[j_idx_], selected_a_ids, match_b_ids)
+					
 				clean_tree(grass_data[j_idx_].root)
 				clean_tree(grass_data[m_idx_].root)
 
 				# remove all matches if two matches is not equal
 				if len(selected_a_ids) != len(match_b_ids):
-					for pair_idx in range(len(selected_a_ids)):
-						a_node_id = selected_a_ids[pair_idx]
-						if a_node_id in sel_indices[j_idx_]:
-							sel_indices[j_idx_].remove(a_node_id)
-							print('removed %d from set %d', a_node_id, j_idx_)
+					# for pair_idx in range(len(selected_a_ids)):
+					# 	a_node_id = selected_a_ids[pair_idx]
+					# 	if a_node_id in sel_indices[j_idx_]:
+					# 		sel_indices[j_idx_].remove(a_node_id)
+					# 		print('removed %d from set %d', a_node_id, j_idx_)
 					
-					for pair_idx in range(len(match_b_ids)):
-						b_node_id = match_b_ids[pair_idx]
-						if b_node_id in sel_indices[m_idx_]:
-							sel_indices[m_idx_].remove(b_node_id)
-							print('removed %d from set %d', b_node_id, m_idx_)
+					# for pair_idx in range(len(match_b_ids)):
+					# 	b_node_id = match_b_ids[pair_idx]
+					# 	if b_node_id in sel_indices[m_idx_]:
+					# 		sel_indices[m_idx_].remove(b_node_id)
+					# 		print('removed %d from set %d', b_node_id, m_idx_)
+					pass
 				else:
 					# check the pair is exist in sel_indices
-					# for pair_idx in range(min(len(selected_a_ids), len(match_b_ids))):
-					for pair_idx in range(len(selected_a_ids)):
+					for pair_idx in range(min(len(selected_a_ids), len(match_b_ids))):
+					# for pair_idx in range(len(selected_a_ids)):
 						a_node_id = selected_a_ids[pair_idx]
 						b_node_id = match_b_ids[pair_idx]
-						if np.random.randint(2) == 0 and a_node_id in sel_indices[j_idx_]:
-							sel_indices[j_idx_].remove(a_node_id)
-							print('removed %d from set %d', a_node_id, j_idx_)
-						if np.random.randint(2) == 1 and b_node_id in sel_indices[m_idx_]:
-							sel_indices[m_idx_].remove(b_node_id)
-							print('removed %d from set %d', b_node_id, m_idx_)
+						if a_node_id in sel_indices[j_idx_] and b_node_id in sel_indices[m_idx_]:
+							if len(sel_indices[j_idx_]) >= len(sel_indices[m_idx_]):
+								sel_indices[j_idx_].remove(a_node_id)
+								print('removed %d from set %d' % (a_node_id, j_idx_))
+							elif len(sel_indices[j_idx_]) < len(sel_indices[m_idx_]):
+								sel_indices[m_idx_].remove(b_node_id)
+								print('removed %d from set %d' % (b_node_id, m_idx_))
+
+		# remove matches
+		for i in range(len(matches)):
+			a_id = matches[i][0]
+			b_id = matches[i][1]
+
+			a_node_id = matches_node_indices[i][0]
+			b_node_id = matches_node_indices[i][1]
+			
+			if a_node_id in sel_indices[a_id] and b_node_id in sel_indices[b_id]:
+				sel_indices[a_id].remove(a_node_id)
+				print('removed %d from set %d' % (a_node_id, a_id))
 
 		shape_pair_ids = {}
 		valid_shape_count = 0
@@ -726,7 +783,7 @@ if __name__ == '__main__':
 		# selected_a_ids = []
 		# match_b_ids = []
 		# while len(selected_a_ids) < 1:
-		#	sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids)
+		# 	sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids)
 		# give_valid_to_tree_b(tree_b, match_b_ids)
 		# selected_b_ids = []	  
 		# sample_id_from_tree_b(tree_b, selected_b_ids)
@@ -736,10 +793,10 @@ if __name__ == '__main__':
 		# shape_pair_ids={'shape_a_index':i, 'shape_b_index':i+1, 'selected_a_ids': selected_a_ids, 'selected_b_ids':selected_b_ids}
 		# final_result.append(shape_pair_ids)
 	
-	# import pickle
-	# with open("shape_node_ids_%d_shapes.bin" % multi_shape_num, 'wb') as f:
-		# pickle.dump(final_result, f)
-	savemat(result_path+"/shape_node_ids_%d_shapes.mat" % multi_shape_num, {'final_result':final_result})
+	import pickle
+	with open("shape_node_ids_%d_shapes.bin" % multi_shape_num, 'wb') as f:
+		pickle.dump(final_result, f)
+	savemat("shape_node_ids_%d_shapes.mat" % multi_shape_num, {'final_result':final_result})
 	# boxes, labels = decode_structure(tree_a.root)
 	# label_text = []
 	# for label in labels:
