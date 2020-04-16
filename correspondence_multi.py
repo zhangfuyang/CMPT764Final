@@ -12,6 +12,8 @@ import math
 import random
 import numpy as np
 from scipy.io import savemat
+from itertools import combinations
+import os
 
 def vrrotvec2mat(rotvector):
 	s = math.sin(rotvector[3])
@@ -593,25 +595,29 @@ if __name__ == '__main__':
 	if config.finetune:
 		print("fintune phase")
 	
-	grass_data = ChairDataset(config.data_path)
+	grass_data = ChairDataset(config.data_path, config.testset)
 
 	""" Specific configuration for Multi-Shape correspondences
 	"""
-	multi_shape_num = 5
-	
+	result_path = './result/'+config.testset
+	if not os.path.exists(result_path):
+		os.makedirs(result_path) 
+	multi_shape_num = config.sample_shape_number
+	iters = combinations(list(range(grass_data.data_size)), multi_shape_num)
 	final_result = []
-	for i in range(100):
+	for it in iters:
+	#for i in range(grass_data.data_size):
 
 		# generating index -------------------------------------------------------------------------
-		a_range = np.arange(100)
-		np.random.shuffle(a_range)
-		indices_array = [i, i+1, i+2, i+3, i+4]
+		#a_range = np.arange(grass_data.data_size)
+		#np.random.shuffle(a_range)
+		#indices_array = [i, i+1, i+2, i+3, i+4]
 
 		# for j in range(a_range.shape[0]):
-		# 	if a_range[j] not in indices_array:
-		# 		indices_array.append(int(a_range[j]))
+		#	if a_range[j] not in indices_array:
+		#		indices_array.append(int(a_range[j]))
 		# indices_array = indices_array[:multi_shape_num]
-
+		indices_array = it
 		# assign the label for each tree -----------------------------------------------------------
 		for g_idx in indices_array:
 			tree = grass_data[g_idx]
@@ -720,7 +726,7 @@ if __name__ == '__main__':
 		# selected_a_ids = []
 		# match_b_ids = []
 		# while len(selected_a_ids) < 1:
-		# 	sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids)
+		#	sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids)
 		# give_valid_to_tree_b(tree_b, match_b_ids)
 		# selected_b_ids = []	  
 		# sample_id_from_tree_b(tree_b, selected_b_ids)
@@ -730,10 +736,10 @@ if __name__ == '__main__':
 		# shape_pair_ids={'shape_a_index':i, 'shape_b_index':i+1, 'selected_a_ids': selected_a_ids, 'selected_b_ids':selected_b_ids}
 		# final_result.append(shape_pair_ids)
 	
-	import pickle
-	with open("shape_node_ids_%d_shapes.bin" % multi_shape_num, 'wb') as f:
-		pickle.dump(final_result, f)
-	savemat("shape_node_ids_%d_shapes.mat" % multi_shape_num, {'final_result':final_result})
+	# import pickle
+	# with open("shape_node_ids_%d_shapes.bin" % multi_shape_num, 'wb') as f:
+		# pickle.dump(final_result, f)
+	savemat(result_path+"/shape_node_ids_%d_shapes.mat" % multi_shape_num, {'final_result':final_result})
 	# boxes, labels = decode_structure(tree_a.root)
 	# label_text = []
 	# for label in labels:
