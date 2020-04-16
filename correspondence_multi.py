@@ -548,7 +548,7 @@ def sample_id_from_tree_b(tree_b, selected_b_ids):
 def sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids):
 	def dfs_a_sample(node):
 		if node.is_leaf():
-			if random.randint(0,10) > 5:
+			if random.randint(0,10) > 2:
 				selected_a_ids.append(node.id)
 				if node.match_id != 0:
 					match_b_ids.append(node.match_id)
@@ -556,7 +556,7 @@ def sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids):
 			dfs_a_sample(node.left)
 			dfs_a_sample(node.right)
 		else:
-			if random.randint(0,10) > 5:
+			if random.randint(0,10) > 2:
 				selected_a_ids.append(node.id)
 				if node.match_id != 0:
 					match_b_ids.append(node.match_id)
@@ -596,13 +596,13 @@ if __name__ == '__main__':
 	config.cuda = config.no_cuda
 	if config.gpu < 0 and config.cuda:
 		config.gpu = 0
-	torch.cuda.set_device(config.gpu)
+	# torch.cuda.set_device(config.gpu)
 	if config.cuda and torch.cuda.is_available():
 		print("using CUDA on GPU ", config.gpu)
 	else:
 		print("Not using CUDA")
-	encoder = torch.load('./models/vq_encoder_model_finetune.pkl')
-	decoder = torch.load('./models/vq_decoder_model_finetune.pkl')
+	encoder = torch.load('./models/vq_encoder_model_finetune.pkl', map_location=torch.device('cpu'))
+	decoder = torch.load('./models/vq_decoder_model_finetune.pkl', map_location=torch.device('cpu'))
 	model = GRASSMerge(config, encoder, decoder)
 	model.cpu()
 	model.eval()
@@ -613,7 +613,6 @@ if __name__ == '__main__':
 
 	""" Specific configuration for Multi-Shape correspondences
 	"""
-	result_path = './result/'+config.testset
 	multi_shape_num = min(grass_data.data_size, 3)
 	
 	final_result = []
@@ -760,6 +759,16 @@ if __name__ == '__main__':
 				sel_indices[a_id].remove(a_node_id)
 				print('removed %d from set %d' % (a_node_id, a_id))
 
+		# check if seat inside?
+		seat_idx = 7
+		seat_flag = False
+		for idx in indices_array:
+			if seat_idx in sel_indices[idx]:
+				seat_flag = True
+		
+		if seat_flag == False:
+			sel_indices[anchor_idx].append(seat_idx)
+
 		shape_pair_ids = {}
 		valid_shape_count = 0
 		for j_idx in indices_array:
@@ -769,7 +778,7 @@ if __name__ == '__main__':
 				valid_shape_count += 1
 		shape_pair_ids['valid_shapes'] = valid_shape_count
 		print('shape_pair_ids', shape_pair_ids)
-
+	
 		final_result.append(shape_pair_ids)
 
 		# tree_a = grass_data[i]
@@ -794,10 +803,10 @@ if __name__ == '__main__':
 		# shape_pair_ids={'shape_a_index':i, 'shape_b_index':i+1, 'selected_a_ids': selected_a_ids, 'selected_b_ids':selected_b_ids}
 		# final_result.append(shape_pair_ids)
 	
-	#import pickle
-	#with open("shape_node_ids_%d_shapes.bin" % multi_shape_num, 'wb') as f:
-#		pickle.dump(final_result, f)
-	savemat(result_path + "/shape_node_ids_%d_shapes.mat" % multi_shape_num, {'final_result':final_result})
+	import pickle
+	with open("shape_node_ids_%d_shapes.bin" % multi_shape_num, 'wb') as f:
+		pickle.dump(final_result, f)
+	savemat("shape_node_ids_%d_shapes.mat" % multi_shape_num, {'final_result':final_result})
 	# boxes, labels = decode_structure(tree_a.root)
 	# label_text = []
 	# for label in labels:
