@@ -613,16 +613,16 @@ if __name__ == '__main__':
 
 	""" Specific configuration for Multi-Shape correspondences
 	"""
-	multi_shape_num = 5
+	multi_shape_num = min(grass_data.data_size, 3)
 	
 	final_result = []
-	for i in range(100):
+	for i in range(grass_data.data_size):
 
 		# generating index -------------------------------------------------------------------------
-		a_range = np.arange(100)
+		a_range = np.arange(grass_data.data_size)
 		np.random.shuffle(a_range)
 		# indices_array = [i, i+1, i+2, i+3, i+4]
-		indices_array = [i, i+1, i+2]
+		indices_array = [i]
 
 		for j in range(a_range.shape[0]):
 			if a_range[j] not in indices_array:
