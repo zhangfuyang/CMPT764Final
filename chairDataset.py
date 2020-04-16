@@ -115,11 +115,11 @@ class Tree(object):
 class ChairDataset(data.Dataset):
     def __init__(self, dir, transform=None):
         self.dir = dir
-        box_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'chair_boxes.mat'))['boxes']).float()
-        op_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'chair_ops.mat'))['ops']).float()
-        sym_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'chair_syms.mat'))['syms']).float()
-        label_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'chair_labels.mat'))['labels']).float()
-        objname = loadmat(os.path.join(self.dir, 'chair_objname.mat'))['obj'][0]
+        box_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'C_chair_boxes.mat'))['boxes']).float()
+        op_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'C_chair_ops.mat'))['ops']).float()
+        sym_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'C_chair_syms.mat'))['syms']).float()
+        label_data = torch.from_numpy(loadmat(os.path.join(self.dir, 'C_chair_labels.mat'))['labels']).float()
+        objname = loadmat(os.path.join(self.dir, 'C_chair_objname.mat'))['obj'][0]
         num_examples = op_data.size()[1]
         box_data = torch.chunk(box_data, num_examples, 1)
         op_data = torch.chunk(op_data, num_examples, 1)

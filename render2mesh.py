@@ -25,7 +25,7 @@ def renderBoxes2mesh_new(boxes, boxes_type, obj_names):
                     vertices.append((float(items[1]), float(items[2]), float(items[3])))
                     t += 1
                 if items[0] == 'f':
-                    faces.append((int(items[1])+v_num, int(items[2])+v_num, int(items[3])+v_num))
+                    faces.append([int(items[1])+v_num, int(items[2])+v_num, int(items[3])+v_num])
             v_num += t
         if isinstance(boxes_type[box_i], int):
             results.append((vertices, faces))
@@ -46,7 +46,7 @@ def renderBoxes2mesh_new(boxes, boxes_type, obj_names):
             preddir_2 = predbox[9:12]
             preddir_1 = preddir_1/LA.norm(preddir_1)
             preddir_2 = preddir_2/LA.norm(preddir_2)
-            preddir_3 = np.cross(preddir_1, preddir_2)
+            preddir_3 = -np.cross(preddir_1, preddir_2)
 
 
             scale = predlengths / gtlengths
@@ -60,6 +60,10 @@ def renderBoxes2mesh_new(boxes, boxes_type, obj_names):
             vertices = []
             for i in range(x.shape[0]):
                 vertices.append(x[i])
+            for i in range(len(faces)):
+                temp = faces[i][0]
+                faces[i][0] = faces[i][1]
+                faces[i][1] = temp
             results.append((vertices, faces))
 
     return results

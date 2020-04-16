@@ -35,7 +35,7 @@ def vrrotvec2mat(rotvector):
     x = rotvector[0]
     y = rotvector[1]
     z = rotvector[2]
-    m = torch.FloatTensor([[t*x*x+c, t*x*y-s*z, t*x*z+s*y], [t*x*y+s*z, t*y*y+c, t*y*z-s*x], [t*x*z-s*y, t*y*z+s*x, t*z*z+c]]).cuda()
+    m = torch.FloatTensor([[t*x*x+c, t*x*y-s*z, t*x*z+s*y], [t*x*y+s*z, t*y*y+c, t*y*z-s*x], [t*x*z-s*y, t*y*z+s*x, t*z*z+c]])
     return m
 
 
@@ -248,7 +248,7 @@ grass_data = ChairDataset(config.data_path)
 def my_collate(batch):
     return batch
 test_iter = torch.utils.data.DataLoader(grass_data, batch_size=1,
-                                        shuffle=True, collate_fn=my_collate)
+                                        shuffle=False, collate_fn=my_collate)
 
 def inference(example):
     enc_fold = FoldExt(cuda=config.cuda)
