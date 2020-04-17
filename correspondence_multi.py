@@ -561,7 +561,7 @@ def sample_id_from_tree_b(tree_b, selected_b_ids):
 def sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids):
 	def dfs_a_sample(node):
 		if node.is_leaf():
-			if random.randint(0,10) > 5 and node.id <= 12:
+			if random.randint(0,10) > 6 and node.id <= 12:
 				selected_a_ids.append(node.id)
 				if node.match_id != 0:
 					match_b_ids.append(node.match_id)
@@ -569,7 +569,7 @@ def sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids):
 			dfs_a_sample(node.left)
 			dfs_a_sample(node.right)
 		else:
-			if random.randint(0,10) > 5 and node.id <= 12:
+			if random.randint(0,10) > 6 and node.id <= 12:
 				selected_a_ids.append(node.id)
 				if node.match_id != 0:
 					match_b_ids.append(node.match_id)
@@ -622,7 +622,7 @@ if __name__ == '__main__':
 	if config.finetune:
 		print("fintune phase")
 
-	data_name = 'C'
+	data_name = config.testset
 	grass_data = ChairDataset(dir=config.data_path, data_name=data_name)
 
 	""" Specific configuration for Multi-Shape correspondences
@@ -883,3 +883,4 @@ if __name__ == '__main__':
 			# elif label == 3:
 				# label_text.append('armrest')
 		# showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text)
+
