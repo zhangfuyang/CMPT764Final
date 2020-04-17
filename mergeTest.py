@@ -451,6 +451,15 @@ file_name = result_path+'/shape_node_ids_%d_shapes.mat'% config.sample_shape_num
 pairs = loadmat(os.path.join('./', file_name))['final_result']
 image = True
 pairs = pairs[0]
+
+sample_gtboxes = []
+sample_gtbox_type = []
+sample_boxes = []
+sample_labels = []
+sample_loss = []
+sample_objnames = []
+sample_try_idx = []
+sample_idx = []
 for i in range(len(pairs)):
 	print (i)
 	num = pairs[i]['valid_shapes'][0][0][0][0]
@@ -496,8 +505,19 @@ for i in range(len(pairs)):
 		label_text = get_label_text(labelsRefine)
 		# showGenshape(torch.cat(boxesRefine,0).data.cpu().numpy(), labels=label_text,
 						# save=image, savedir=result_path+'/Sample_' + str(i) + '_Refine_Merge_try_' + str(j) + '.png')
-	print('final loss :', loss)
-	showGenshape(torch.cat(boxesRefine,0).data.cpu().numpy(), labels=label_text,
-						save=image, savedir=result_path+'/Sample_' + str(i) + '_Refine_Merge_try_' + str(j) + '.png')
-	alignBoxAndRender(torch.cat(gtboxes,0).data.cpu().numpy(),
-					torch.cat(boxesRefine,0).data.cpu().numpy(), gtbox_type, objnamesRefine, result_path+'/Sample_'+str(i)+'_Refine_Merge_try_'+str(j)+'.obj')
+	print('final loss :', loss.data.cpu().numpy()[0])
+	sample_gtboxes.append(gtboxes)
+	sample_gtbox_type.append(gtbox_type)
+	sample_boxes.append(boxesRefine)
+	sample_labels.append(label_text)
+	sample_loss.append(loss.data.cpu().numpy()[0])
+	sample_objnames.append(objnamesRefine)
+	sample_try_idx.append(j)
+# print (sample_loss[0] < sample_loss[1])
+# print (sorted(enumerate(sample_loss), key=lambda x:x[1]))
+indexes = [i[0] for i in sorted(enumerate(sample_loss), key=lambda x:x[1])]
+for idx, i in enumerate(indexes)	:
+	showGenshape(torch.cat(sample_boxes[i],0).data.cpu().numpy(), labels=sample_labels[i], save=image, 
+					savedir=result_path+'/' + str(idx) +'_Sample_' + str(i) + '_Refine_Merge_try_' + str(sample_try_idx[i]) + '_Loss_' + str(sample_loss[i]) + '.png')
+	alignBoxAndRender(torch.cat(sample_gtboxes[i],0).data.cpu().numpy(), torch.cat(sample_boxes[i],0).data.cpu().numpy(), sample_gtbox_type[i], sample_objnames[i], 
+					result_path+'/' + str(idx) + '_Sample_'+ str(i) + '_Refine_Merge_try_' + str(sample_try_idx[i])+ '_Loss_' + str(sample_loss[i]) +'.obj')
