@@ -253,6 +253,18 @@ def decode_fold(model, feature, root, Boxes, Syms, Labels, Ops, objnames):
 def my_collate(batch):
 	return batch
 
+def find_node_num(node):
+	if node.is_leaf():
+		#assign loss to each node of tree b
+		return 0
+	elif node.is_adj():
+		left_num = find_node_num(node.left)
+		right_num = find_node_num(node.right)
+		return left_num + right_num + 1
+	else:
+		left_num = find_node_num(node.left)
+		return left_num + 1
+		
 def inference(root):
 	enc_fold = FoldExt(cuda=config.cuda)
 	enc_fold_nodes = []
@@ -471,11 +483,13 @@ for i in range(len(pairs)):
 	j = 0
 	prev_loss = 0.0
 	loss = 1000.0
-	treshold = 0.005
+	treshold = 0.0005
+	node_number = find_node_num(refine_root)
 	while j==0 or prev_loss - loss > treshold:
 		j = j+1
 		prev_loss = loss
 		loss, refine_tree = inference(refine_root)
+		loss = loss/node_number
 		refine_root = refine_tree.root
 		boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine = decode_structure(refine_root)
 		#boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine = reorder(gtboxes, boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine)
@@ -486,4 +500,4 @@ for i in range(len(pairs)):
 	showGenshape(torch.cat(boxesRefine,0).data.cpu().numpy(), labels=label_text,
 						save=image, savedir=result_path+'/Sample_' + str(i) + '_Refine_Merge_try_' + str(j) + '.png')
 	alignBoxAndRender(torch.cat(gtboxes,0).data.cpu().numpy(),
-				  	torch.cat(boxesRefine,0).data.cpu().numpy(), gtbox_type, objnamesRefine, result_path+'/Sample_'+str(i)+'_Refine_Merge_try_'+str(j)+'.obj')
+					torch.cat(boxesRefine,0).data.cpu().numpy(), gtbox_type, objnamesRefine, result_path+'/Sample_'+str(i)+'_Refine_Merge_try_'+str(j)+'.obj')
