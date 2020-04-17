@@ -29,7 +29,7 @@ def get_args():
 	parser.add_argument('--data_path', type=str, default='data')
 	parser.add_argument('--save_path', type=str, default='models')
 	parser.add_argument('--resume_snapshot', type=str, default='')
-	parser.add_argument('--testset', type=str, default='B')#A:3 b:5 C:10
-	parser.add_argument('--sample_shape_number', type=int, default=3)#how many shape do you want to sample parts
+	parser.add_argument('--testset', type=str, default='B')#A:3 B:5 C:10
+	parser.add_argument('--sample_shape_number', type=int, default=2)#dont change
 	args = parser.parse_args()
 	return args

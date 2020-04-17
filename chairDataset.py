@@ -47,6 +47,10 @@ class Tree(object):
 			self.match_id = None
 			self.selected = False
 			self.tree_id = tree_id
+			self.last_box = None
+			self.last_sym = None
+			self.current_box = None
+			self.current_sym = None
 
 		def is_leaf(self):
 			return self.node_type == Tree.NodeType.BOX and self.box is not None
@@ -88,6 +92,7 @@ class Tree(object):
 				queue.append(n)
 		assert len(queue) == 1
 		self.root = queue[0]
+		self.id = -1
 
 	def addNoise(self):
 		z = min(5, len(self.leves)+len(self.symNodes))
@@ -135,6 +140,7 @@ class ChairDataset(data.Dataset):
 			syms = torch.t(sym_data[i])
 			labels = label_data[:, i]
 			tree = Tree(boxes, ops, syms, labels, [objname[i][0][box_i][0] for box_i in range(box_num)])
+			tree.id = i
 			give_node_id(tree.root)
 			self.trees.append(tree)
 			#showGenshape(boxes.data.cpu().numpy())

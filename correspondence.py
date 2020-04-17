@@ -11,6 +11,8 @@ from chairDataset import Tree
 import math
 import random
 from scipy.io import savemat
+from itertools import combinations
+import os
 
 def vrrotvec2mat(rotvector):
 	s = math.sin(rotvector[3])
@@ -19,7 +21,7 @@ def vrrotvec2mat(rotvector):
 	x = rotvector[0]
 	y = rotvector[1]
 	z = rotvector[2]
-	m = torch.FloatTensor([[t*x*x+c, t*x*y-s*z, t*x*z+s*y], [t*x*y+s*z, t*y*y+c, t*y*z-s*x], [t*x*z-s*y, t*y*z+s*x, t*z*z+c]]).cuda()
+	m = torch.FloatTensor([[t*x*x+c, t*x*y-s*z, t*x*z+s*y], [t*x*y+s*z, t*y*y+c, t*y*z-s*x], [t*x*z-s*y, t*y*z+s*x, t*z*z+c]])
 	return m
 
 def decode_structure(root, noise=False):
@@ -127,90 +129,6 @@ def decode_structure(root, noise=False):
 			boxes.extend(reBoxes)
 			labels.extend(reLabels)
 	return boxes, labels
-
-def render_node_to_box(tree):
-	Boxs = []
-	syms = [torch.ones(8).mul(10)]
-	stack = [tree.root]
-	while len(stack) > 0:
-		node = stack.pop()
-		if node.is_adj():
-			s = syms.pop()
-			syms.append(s)
-			syms.append(s)
-			stack.append(node.left)
-			stack.append(node.right)
-		elif node.is_sym():
-			stack.append(node.left)
-			syms.pop()
-			syms.append(node.sym.squeeze(0))
-		elif node.is_leaf():
-			reBoxes = [node.box]
-			s = syms.pop()
-			l1 = abs(s[0]+1)
-			l2 = abs(s[0])
-			l3 = abs(s[0]-1)
-
-			if l1 < 0.15:
-				sList = torch.split(s, 1, 0)
-				bList = torch.split(node.box.squeeze(0), 1, 0)
-				f1 = torch.cat([sList[1], sList[2], sList[3]])
-				f1 = f1/torch.norm(f1)
-				f2 = torch.cat([sList[4], sList[5], sList[6]])
-				folds = round(1/s[7])
-				for i in range(folds-1):
-					rotvector = torch.cat([f1, sList[7].mul(2*3.1415).mul(i+1)])
-					rotm = vrrotvec2mat(rotvector)
-					center = torch.cat([bList[0], bList[1], bList[2]])
-					dir0 = torch.cat([bList[3], bList[4], bList[5]])
-					dir1 = torch.cat([bList[6], bList[7], bList[8]])
-					dir2 = torch.cat([bList[9], bList[10], bList[11]])
-					newcenter = rotm.matmul(center.add(-f2)).add(f2)
-					newdir1 = rotm.matmul(dir1)
-					newdir2 = rotm.matmul(dir2)
-					newbox = torch.cat([newcenter, dir0, newdir1, newdir2])
-					reBoxes.append(Variable(newbox.unsqueeze(0)))
-			elif l2 < 0.15:
-				sList = torch.split(s, 1, 0)
-				bList = torch.split(node.box.squeeze(0), 1, 0)
-				trans = torch.cat([sList[1], sList[2], sList[3]])
-				trans_end = torch.cat([sList[4], sList[5], sList[6]])
-				center = torch.cat([bList[0], bList[1], bList[2]])
-				trans_length = math.sqrt(torch.sum(trans**2))
-				trans_total = math.sqrt(torch.sum(trans_end.add(-center)**2))
-				folds = round(trans_total/trans_length)
-				for i in range(folds):
-					center = torch.cat([bList[0], bList[1], bList[2]])
-					dir0 = torch.cat([bList[3], bList[4], bList[5]])
-					dir1 = torch.cat([bList[6], bList[7], bList[8]])
-					dir2 = torch.cat([bList[9], bList[10], bList[11]])
-					newcenter = center.add(trans.mul(i+1))
-					newbox = torch.cat([newcenter, dir0, dir1, dir2])
-					reBoxes.append(Variable(newbox.unsqueeze(0)))
-			elif l3 < 0.15:
-				sList = torch.split(s, 1, 0)
-				bList = torch.split(node.box.squeeze(0), 1, 0)
-				ref_normal = torch.cat([sList[1], sList[2], sList[3]])
-				ref_normal = ref_normal / torch.norm(ref_normal)
-				ref_point = torch.cat([sList[4], sList[5], sList[6]])
-				center = torch.cat([bList[0], bList[1], bList[2]])
-				dir0 = torch.cat([bList[3], bList[4], bList[5]])
-				dir1 = torch.cat([bList[6], bList[7], bList[8]])
-				dir2 = torch.cat([bList[9], bList[10], bList[11]])
-				if ref_normal.matmul(ref_point.add(-center)) < 0:
-					ref_normal = -ref_normal
-				newcenter = ref_normal.mul(2 * abs(torch.sum(ref_point.add(-center).mul(ref_normal)))).add(center)
-				if ref_normal.matmul(dir1) < 0:
-					ref_normal = -ref_normal
-				dir1 = dir1.add(ref_normal.mul(-2 * ref_normal.matmul(dir1)))
-				if ref_normal.matmul(dir2) < 0:
-					ref_normal = -ref_normal
-				dir2 = dir2.add(ref_normal.mul(-2 * ref_normal.matmul(dir2)))
-				newbox = torch.cat([newcenter, dir0, dir1, dir2])
-				reBoxes.append(Variable(newbox.unsqueeze(0)))
-
-			Boxs.extend(reBoxes)
-	return Boxs
 
 def encode_tree(model, tree):
 	def encode_node(node):
@@ -338,6 +256,18 @@ def dfs_b_find_min_id(tree_b):
 	min_loss = 999
 	dfs_id(tree_b.root)
 	return min_id
+
+def find_node_num(node):
+	if node.is_leaf():
+		#assign loss to each node of tree b
+		return 0
+	elif node.is_adj():
+		left_num = find_node_num(node.left)
+		right_num = find_node_num(node.right)
+		return left_num + right_num + 1
+	else:
+		left_num = find_node_num(node.left)
+		return left_num + 1
 		
 def find_correspondence_loss(node_a, tree_b, model):
 	def dfs_b(node):
@@ -350,11 +280,12 @@ def find_correspondence_loss(node_a, tree_b, model):
 				temp = node.left
 				node.left = node_a
 				#get error
+				loss_node_num = find_node_num(tree_b.root)
 				root_feature = encode_tree(model, tree_b)
 				loss = decode_tree(model, root_feature, tree_b)
 				#change to original
 				node.left = temp
-				node.left.loss = loss
+				node.left.loss = loss/loss_node_num
 				print('replace loss : ', loss)
 			if node.left.is_adj():
 				dfs_b(node.left)
@@ -365,10 +296,11 @@ def find_correspondence_loss(node_a, tree_b, model):
 				temp = node.right
 				node.right = node_a
 				#get error
+				loss_node_num = find_node_num(tree_b.root)
 				root_feature = encode_tree(model, tree_b)
 				loss = decode_tree(model, root_feature, tree_b)
 				node.right = temp
-				node.right.loss = loss
+				node.right.loss = loss/loss_node_num
 				print('replace loss : ', loss)
 			if node.right.is_adj():
 				dfs_b(node.right)
@@ -572,7 +504,7 @@ def clean_tree(node):
 		clean_tree(node.right)
 	else:	
 		return
-		
+
 if __name__ == '__main__':
 
 	config = util.get_args()
@@ -592,18 +524,55 @@ if __name__ == '__main__':
 	if config.finetune:
 		print("fintune phase")
 	
-	grass_data = ChairDataset(config.data_path)
+	result_path = './result/'+config.testset
+	if not os.path.exists(result_path):
+		os.makedirs(result_path)
+		
+	grass_data = ChairDataset(config.data_path, data_name=config.testset)
+	
+	iters = combinations(list(range(grass_data.data_size)), 2)
 	
 	final_result = []
-	for i in range(100):
-		tree_a = grass_data[i]
-		tree_b = grass_data[i+1]
+	count = 0
+	for it in iters:
+		trees = []
+		for idx in it:
+			trees.append(grass_data[idx])
 		#assign label
+		tree_a = trees[0]
+		tree_b = trees[1]
 		dfs_assign_label(tree_a.root)
 		dfs_assign_label(tree_b.root)
 		
 		dfs_a(tree_a.root, tree_b, model)
-		#show_correspondence(tree_a, tree_b)
+		if count == 6:
+			boxes_a, labels_a = decode_structure(tree_a.root)
+			label_text = []
+			for label in labels_a:
+				if label == 0:
+					label_text.append('back')
+				elif label == 1:
+					label_text.append('seat')
+				elif label == 2:
+					label_text.append('leg')
+				elif label == 3:
+					label_text.append('armrest')
+			showGenshape(torch.cat(boxes_a,0).data.cpu().numpy(), labels = label_text)
+			boxes_b, labels_b = decode_structure(tree_b.root)
+			label_text = []
+			for label in labels_b:
+				if label == 0:
+					label_text.append('back')
+				elif label == 1:
+					label_text.append('seat')
+				elif label == 2:
+					label_text.append('leg')
+				elif label == 3:
+					label_text.append('armrest')
+			
+			showGenshape(torch.cat(boxes_b,0).data.cpu().numpy(), labels = label_text)
+			show_correspondence(tree_a, tree_b)
+		   
 		#sample_labels = random.sample(range(4), 2)
 		selected_a_ids = []
 		match_b_ids = []
@@ -615,12 +584,26 @@ if __name__ == '__main__':
 		print('selected_a_ids', selected_a_ids)
 		print('match_b_ids', match_b_ids)
 		print('selected_b_ids', selected_b_ids)
-		shape_pair_ids={'shape_a_index':i, 'shape_b_index':i+1, 'selected_a_ids': selected_a_ids, 'selected_b_ids':selected_b_ids}
+		
+		if(len(selected_b_ids) == 0):
+			continue
+		shape_pair_ids = {}
+		shape_pair_ids['shape_%d_index' % 0] = tree_a.id
+		shape_pair_ids['shape_%d_ids' % 0] = selected_a_ids
+		shape_pair_ids['shape_%d_index' % 1] = tree_b.id
+		shape_pair_ids['shape_%d_ids' % 1] = selected_b_ids
+		shape_pair_ids['valid_shapes'] = 2
+		print('shape_pair_ids', shape_pair_ids)
+	
 		final_result.append(shape_pair_ids)
+		
+		# shape_pair_ids={'shape_a_index':i, 'shape_b_index':i+1, 'selected_a_ids': selected_a_ids, 'selected_b_ids':selected_b_ids}
+		# final_result.append(shape_pair_ids)
 		clean_tree(tree_a.root)
 		clean_tree(tree_b.root)
+		count += 1
 		
-	savemat("shape_node_ids.mat", {'final_result':final_result})
+	savemat(result_path + "/shape_node_ids_2_shapes.mat", {'final_result':final_result})
 	# boxes, labels = decode_structure(tree_a.root)
 	# label_text = []
 	# for label in labels:
