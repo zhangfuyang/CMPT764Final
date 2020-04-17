@@ -339,7 +339,19 @@ def dfs_b_find_min_id(tree_b):
 	min_loss = 999
 	dfs_id(tree_b.root)
 	return min_id
-		
+
+
+def find_node_num(node):
+	if node.is_leaf():
+		return 0
+	elif node.is_adj():
+		left_num = find_node_num(node.left)
+		right_num = find_node_num(node.right)
+		return left_num + right_num + 1
+	else:
+		left_num = find_node_num(node.left)
+		return left_num + 1 
+
 def find_correspondence_loss(node_a, tree_b, model):
 	def dfs_b(node):
 		if node.is_adj():
@@ -352,10 +364,11 @@ def find_correspondence_loss(node_a, tree_b, model):
 				node.left = node_a
 				#get error
 				root_feature = encode_tree(model, tree_b)
+				loss_node_num = find_node_num(tree_b.root)				
 				loss = decode_tree(model, root_feature, tree_b)
 				#change to original
 				node.left = temp
-				node.left.loss = loss
+				node.left.loss = loss / loss_node_num
 				print('replace loss : ', loss)
 			if node.left.is_adj():
 				dfs_b(node.left) 
@@ -548,7 +561,7 @@ def sample_id_from_tree_b(tree_b, selected_b_ids):
 def sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids):
 	def dfs_a_sample(node):
 		if node.is_leaf():
-			if random.randint(0,10) > 2:
+			if random.randint(0,10) > 5 and node.id <= 12:
 				selected_a_ids.append(node.id)
 				if node.match_id != 0:
 					match_b_ids.append(node.match_id)
@@ -556,7 +569,7 @@ def sample_id_from_tree_a(tree_a, selected_a_ids, match_b_ids):
 			dfs_a_sample(node.left)
 			dfs_a_sample(node.right)
 		else:
-			if random.randint(0,10) > 2:
+			if random.randint(0,10) > 5 and node.id <= 12:
 				selected_a_ids.append(node.id)
 				if node.match_id != 0:
 					match_b_ids.append(node.match_id)
@@ -609,7 +622,8 @@ if __name__ == '__main__':
 	if config.finetune:
 		print("fintune phase")
 
-	grass_data = ChairDataset(dir=config.data_path, data_name='A')
+	data_name = 'C'
+	grass_data = ChairDataset(dir=config.data_path, data_name=data_name)
 
 	""" Specific configuration for Multi-Shape correspondences
 	"""
@@ -806,7 +820,7 @@ if __name__ == '__main__':
 	import pickle
 	with open("shape_node_ids_%d_shapes.bin" % multi_shape_num, 'wb') as f:
 		pickle.dump(final_result, f)
-	savemat("shape_node_ids_%d_shapes.mat" % multi_shape_num, {'final_result':final_result})
+	savemat("result/%s/shape_node_ids_%d_shapes.mat" % (data_name, multi_shape_num), {'final_result':final_result})
 	# boxes, labels = decode_structure(tree_a.root)
 	# label_text = []
 	# for label in labels:
@@ -869,4 +883,3 @@ if __name__ == '__main__':
 			# elif label == 3:
 				# label_text.append('armrest')
 		# showGenshape(torch.cat(boxes,0).data.cpu().numpy(), labels=label_text)
-
