@@ -234,16 +234,16 @@ def decode_fold(model, feature, root, Boxes, Syms, Labels, Ops, objnames):
 			fr = encode_node(right_node)
 			left_f = model.outterNode(feature, fr)
 			right_f = model.outterNode(feature, fl)
-			left_loss = decode_node(left_f, node.left, newBoxs, newSyms, newLabels, newOps, newObj)
 			right_loss = decode_node(right_f, node.right, newBoxs, newSyms, newLabels, newOps, newObj)
+			left_loss = decode_node(left_f, node.left, newBoxs, newSyms, newLabels, newOps, newObj)
 			newOps.append(1)
 			return left_loss + right_loss + node_loss
 		elif node.is_sym():
 			node_loss, feature = model.vqlizationWithLoss(feature)
 			f = encode_node(node)
 			new_f, sym_f = model.symParaNode(feature, f)
-			newSyms.append(sym_f.detach().cpu())
 			left_loss = decode_node(new_f, node.left, newBoxs, newSyms, newLabels, newOps, newObj)
+			newSyms.append(sym_f.detach().cpu())
 			newOps.append(2)
 			return left_loss + node_loss
 
@@ -478,7 +478,7 @@ for i in range(len(pairs)):
 		loss, refine_tree = inference(refine_root)
 		refine_root = refine_tree.root
 		boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine = decode_structure(refine_root)
-		boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine = reorder(gtboxes, boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine)
+		#boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine = reorder(gtboxes, boxesRefine, boxesRefine_type, labelsRefine, objnamesRefine)
 		label_text = get_label_text(labelsRefine)
 		# showGenshape(torch.cat(boxesRefine,0).data.cpu().numpy(), labels=label_text,
 						# save=image, savedir=result_path+'/Sample_' + str(i) + '_Refine_Merge_try_' + str(j) + '.png')
