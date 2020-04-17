@@ -18,7 +18,7 @@ Only need to change configuration before run demo.
 
 **Demo**
 ```
-python correspondence_multi.py
+python correspondence.py
 python mergeTest.py
 ```
 
