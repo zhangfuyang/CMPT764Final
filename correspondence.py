@@ -277,6 +277,7 @@ def find_correspondence_loss(node_a, tree_b, model):
 			#print('node.left label, ', node.left.box_label)
 			if node.left.box_label == node_a.box_label:
 				print('replace node id of b: ', node.left.id)
+				print('replace node type of b: ', node.left.node_type)
 				temp = node.left
 				node.left = node_a
 				#get error
@@ -285,14 +286,16 @@ def find_correspondence_loss(node_a, tree_b, model):
 				loss = decode_tree(model, root_feature, tree_b)
 				#change to original
 				node.left = temp
-				node.left.loss = loss/loss_node_num
+				node.left.loss = loss
 				print('replace loss : ', loss)
+				print('replace loss ava : ', node.left.loss)
 			if node.left.is_adj():
 				dfs_b(node.left)
 			#print('node_a label, ', node_a.box_label)
 			#print('node.right label, ', node.right.box_label)
 			if node.right.box_label == node_a.box_label:
 				print('replace node id of b: ', node.right.id)
+				print('replace node type of b: ', node.right.node_type)
 				temp = node.right
 				node.right = node_a
 				#get error
@@ -300,8 +303,9 @@ def find_correspondence_loss(node_a, tree_b, model):
 				root_feature = encode_tree(model, tree_b)
 				loss = decode_tree(model, root_feature, tree_b)
 				node.right = temp
-				node.right.loss = loss/loss_node_num
+				node.right.loss = loss
 				print('replace loss : ', loss)
+				print('replace loss ava : ', node.right.loss)
 			if node.right.is_adj():
 				dfs_b(node.right)
 	dfs_b(tree_b.root)
@@ -415,7 +419,6 @@ def show_correspondence(tree_a, tree_b):
 			label_text = []
 			for i in range(box_a.size(0)):
 				label_text.append('shape_a_part')
-			label_text.append('shape_a_part')
 			for i in range(box_b.size(0)):
 				label_text.append('shape_b_part')
 			showGenshape(boxes.data.cpu().numpy(), labels=label_text)
@@ -505,6 +508,18 @@ def clean_tree(node):
 	else:	
 		return
 
+def find_all_node_num(node):
+	if node.is_leaf():
+		#assign loss to each node of tree b
+		return 1
+	elif node.is_adj():
+		left_num = find_node_num(node.left)
+		right_num = find_node_num(node.right)
+		return left_num + right_num + 1
+	else:
+		left_num = find_node_num(node.left)
+		return left_num + 1
+		
 if __name__ == '__main__':
 
 	config = util.get_args()
@@ -539,39 +554,45 @@ if __name__ == '__main__':
 		for idx in it:
 			trees.append(grass_data[idx])
 		#assign label
-		tree_a = trees[0]
-		tree_b = trees[1]
+		num_0 = find_all_node_num(trees[0].root)
+		num_1 = find_all_node_num(trees[1].root)
+		if num_0 > num_1:
+			tree_a = trees[1]
+			tree_b = trees[0]
+		else:
+			tree_a = trees[0]
+			tree_b = trees[1]
 		dfs_assign_label(tree_a.root)
 		dfs_assign_label(tree_b.root)
 		
 		dfs_a(tree_a.root, tree_b, model)
-		if count == 6:
-			boxes_a, labels_a = decode_structure(tree_a.root)
-			label_text = []
-			for label in labels_a:
-				if label == 0:
-					label_text.append('back')
-				elif label == 1:
-					label_text.append('seat')
-				elif label == 2:
-					label_text.append('leg')
-				elif label == 3:
-					label_text.append('armrest')
-			showGenshape(torch.cat(boxes_a,0).data.cpu().numpy(), labels = label_text)
-			boxes_b, labels_b = decode_structure(tree_b.root)
-			label_text = []
-			for label in labels_b:
-				if label == 0:
-					label_text.append('back')
-				elif label == 1:
-					label_text.append('seat')
-				elif label == 2:
-					label_text.append('leg')
-				elif label == 3:
-					label_text.append('armrest')
+		# if count == 0:
+			# boxes_a, labels_a = decode_structure(tree_a.root)
+			# label_text = []
+			# for label in labels_a:
+				# if label == 0:
+					# label_text.append('back')
+				# elif label == 1:
+					# label_text.append('seat')
+				# elif label == 2:
+					# label_text.append('leg')
+				# elif label == 3:
+					# label_text.append('armrest')
+			# showGenshape(torch.cat(boxes_a,0).data.cpu().numpy(), labels = label_text)
+			# boxes_b, labels_b = decode_structure(tree_b.root)
+			# label_text = []
+			# for label in labels_b:
+				# if label == 0:
+					# label_text.append('back')
+				# elif label == 1:
+					# label_text.append('seat')
+				# elif label == 2:
+					# label_text.append('leg')
+				# elif label == 3:
+					# label_text.append('armrest')
 			
-			showGenshape(torch.cat(boxes_b,0).data.cpu().numpy(), labels = label_text)
-			show_correspondence(tree_a, tree_b)
+			# showGenshape(torch.cat(boxes_b,0).data.cpu().numpy(), labels = label_text)
+			# show_correspondence(tree_a, tree_b)
 		   
 		#sample_labels = random.sample(range(4), 2)
 		selected_a_ids = []
